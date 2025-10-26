@@ -6,6 +6,7 @@
 - Setup:
 ```
 git clone <link_repo>
+git checkout -b <yourname>
 cd nuve-be
 npm install
 ```
@@ -14,11 +15,23 @@ npm install
 GEMINI_API_KEY=<api_key>
 PORT=8080
 ```
+Push project
+```
+git push -u origin main
+# pull request in github
+```
 
 
 ### 2. Frontend
+Setup
 ```
 git clone <link_repo>
+git checkout -b <yourname>
 cd nuve-fe
+```
+Push project
+```
+git push -u origin main
+# pull request in github
 ```
 
