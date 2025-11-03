@@ -3,6 +3,10 @@ import express from 'express'
 import dotenv from 'dotenv'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
+// --- Impor JSON dengan sintaksis 'with' yang benar ---
+import manFashion from './manFashion.json' with { type: 'json' }
+import womanFashion from './womanFashion.json' with { type: 'json' }
+
 dotenv.config()
 const app = express()
 app.use(express.json())
@@ -63,6 +67,61 @@ app.post('/api/rekomendasi-fashion', async (req, res) => {
         })
     }
 })
+
+// --- API BARU ANDA ADA DI SINI ---
+
+// API UNTUK GET PRODUCTS (DENGAN FILTER GENDER)
+app.get('/api/products', (req, res) => {
+    const { gender } = req.query // Mengambil query ?gender=
+
+    if (gender === 'man') {
+        res.json(manFashion)
+    } else if (gender === 'woman') {
+        res.json(womanFashion)
+    } else {
+        // Jika tidak ada filter, kembalikan semua
+        const allProducts = {
+            man: manFashion,
+            woman: womanFashion
+        }
+        res.json(allProducts)
+    }
+})
+
+// FUNGSI BANTU UNTUK MENGGABUNGKAN SEMUA PRODUK
+const getAllProductsArray = () => {
+    const allProducts = [
+        ...manFashion.top,
+        ...manFashion.down,
+        ...manFashion.footwear,
+        ...womanFashion.top,
+        ...womanFashion.down,
+        ...womanFashion.footwear
+    ]
+    return allProducts
+}
+
+// API UNTUK GET PRODUCT DETAIL (BERDASARKAN NAMA)
+app.get('/api/product/detail', (req, res) => {
+    const { nama } = req.query // Mengambil query ?nama=Nama%20Produk
+
+    if (!nama) {
+        return res.status(400).json({ error: 'Query parameter "nama" diperlukan' })
+    }
+
+    const allProducts = getAllProductsArray()
+    
+    // Cari produk berdasarkan nama (tidak case-sensitive)
+    const product = allProducts.find(p => p.nama.toLowerCase() === nama.toLowerCase())
+
+    if (product) {
+        res.json(product)
+    } else {
+        res.status(404).json({ error: 'Produk tidak ditemukan' })
+    }
+})
+
+// ----------------------------------------------------
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server berjalan di port ${PORT}`))
