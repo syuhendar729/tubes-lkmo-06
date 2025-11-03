@@ -1,0 +1,21 @@
+{
+  "name": "tubes-lkmo-06",
+  "version": "1.0.0",
+  "description": "- Setup:\r ```\r git clone <link_repo>\r git checkout -b <yourname>\r cd nuve-be\r npm install\r ```\r - Add `.env` and input API Key Gemini from Gemini API\r ```\r GEMINI_API_KEY=<api_key>\r PORT=8080\r ```\r Push project\r ```\r git push -u origin main\r # pull request in github\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syuhendar729/tubes-lkmo-06.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syuhendar729/tubes-lkmo-06/issues"
+  },
+  "homepage": "https://github.com/syuhendar729/tubes-lkmo-06#readme"
+}
