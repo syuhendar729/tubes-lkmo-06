@@ -152,7 +152,37 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 2.5rem;
-    min-height: 240px;
+    min-height: 400px;
+    padding: 2rem 0;
+}
+
+.clothing-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.clothing-item {
+    max-width: 200px;
+    max-height: 150px;
+    object-fit: contain;
+    display: block;
+}
+
+.clothing-item.hat {
+    z-index: 3;
+    max-width: 120px;
+    max-height: 100px;
+}
+
+.clothing-item.shirt {
+    z-index: 2;
+}
+
+.clothing-item.pants {
+    z-index: 1;
 }
 
 .man-arrows {
@@ -178,7 +208,7 @@ body {
     gap: 0rem;
     justify-content: center;
     align-items: center;
-}
+    }
 .arrow-placeholder {
     width: 10px;
     height: 40px;
@@ -205,6 +235,37 @@ body {
 .arrow-btn:hover {
     background: #f0f0f0;
     border-color: #888;
+}
+
+/* Arrow button positions */
+.arrow-btn.head-left {
+    top: 65px;
+    left: 200px;
+}
+
+.arrow-btn.head-right {
+    top: 65px;
+    right: 200px;
+}
+
+.arrow-btn.top-left {
+    top: 195px;
+    left: 200px;
+}
+
+.arrow-btn.top-right {
+    top: 195px;
+    right: 200px;
+}
+
+.arrow-btn.bottom-left {
+    top: 350px;
+    left: 200px;
+}
+
+.arrow-btn.bottom-right {
+    top: 350px;
+    right: 200px;
 }
 
 /* Form Styles */
