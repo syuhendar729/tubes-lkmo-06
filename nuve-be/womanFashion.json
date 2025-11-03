@@ -1,0 +1,98 @@
+{
+    "top": [
+        {
+            "nama": "MiuMui",
+            "jenis": "Sweater",
+            "harga": "Rp 179.000",
+            "deskripsi": "Sweater rajut abu muda dengan motif garis lembut, tampil cozy."
+        },
+        {
+            "nama": "Soft Layer",
+            "jenis": "Blouse",
+            "harga": "Rp 149.000",
+            "deskripsi": "Blouse crop hitam dengan bahan halus dan potongan modern."
+        },
+        {
+            "nama": "Wine Knit",
+            "jenis": "Cardigan",
+            "harga": "Rp 189.000",
+            "deskripsi": "Cardigan maroon rajut halus dengan kancing depan yang manis."
+        },
+        {
+            "nama": "Pastel Bloom",
+            "jenis": "Outer",
+            "harga": "Rp 179.000",
+            "deskripsi": "Outer pink lembut, ringan dan cocok untuk outfit harian."
+        },
+        {
+            "nama": "Sand Tank",
+            "jenis": "Tank Top",
+            "harga": "Rp 99.000",
+            "deskripsi": "Tank top warna beige, simpel dan mudah dipadukan."
+        }
+    ],
+    "down": [
+        {
+            "nama": "Pleat Cream",
+            "jenis": "Rok",
+            "harga": "Rp 169.000",
+            "deskripsi": "Rok mini lipit warna krem dengan tampilan feminin."
+        },
+        {
+            "nama": "Cotton Flow",
+            "jenis": "Dress",
+            "harga": "Rp 189.000",
+            "deskripsi": "Rok berbahan katun ringan, nyaman untuk aktivitas santai."
+        },
+        {
+            "nama": "Linen Ivory",
+            "jenis": "Celana",
+            "harga": "Rp 179.000",
+            "deskripsi": "Celana panjang ivory dari bahan linen yang sejuk dan ringan."
+        },
+        {
+            "nama": "Cloudy Skirt",
+            "jenis": "Celana",
+            "harga": "Rp 189.000",
+            "deskripsi": "Celana panjang A-line bahan satin lembut, cocok untuk acara kasual."
+        },
+        {
+            "nama": "Noir Flow",
+            "jenis": "Jeans",
+            "harga": "Rp 199.000",
+            "deskripsi": "Jeans hitam longgar dengan bahan jatuh yang nyaman."
+        }
+    ],
+    "footwear": [
+        {
+            "nama": "Cloud Step",
+            "jenis": "Sepatu",
+            "harga": "Rp 179.000",
+            "deskripsi": "Sepatu slip-on putih dengan bahan lembut dan ringan untuk aktivitas harian."
+        },
+        {
+            "nama": "Sunny Heels",
+            "jenis": "Sepatu",
+            "harga": "Rp 189.000",
+            "deskripsi": "Sandal heels krem dengan tali halus, cocok untuk tampilan kasual manis."
+        },
+        {
+            "nama": "Air White",
+            "jenis": "Sepatu",
+            "harga": "Rp 179.000",
+            "deskripsi": "Sneakers putih tinggi dengan sol karet fleksibel dan gaya clean."
+        },
+        {
+            "nama": "Ivory Chic",
+            "jenis": "Sepatu",
+            "harga": "Rp 199.000",
+            "deskripsi": "Sepatu heels putih elegan dengan hak pendek yang nyaman dipakai lama."
+        },
+        {
+            "nama": "Noir Point",
+            "jenis": "Sepatu",
+            "harga": "Rp 189.000",
+            "deskripsi": "Sepatu heels hitam berujung runcing dengan bahan glossy modern."
+        }
+    ]
+}
