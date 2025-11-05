@@ -62,7 +62,8 @@ const Recommendation = ({ gender }) => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const basePath = `../asset/asset-${gender}`;
+  // Menggunakan path relatif dari folder public atau langsung dari asset
+  const basePath = `/asset/asset-${gender}`;
 
   return (
     <div>
