@@ -18,6 +18,12 @@ const Man = () => {
     pants: 0
   });
 
+  const [selectedCategories, setSelectedCategories] = useState({
+    atasan: false,
+    bawahan: false,
+    footwear: false
+  });
+
   const [formData, setFormData] = useState({
     umur: '',
     lokasi: '',
@@ -43,6 +49,13 @@ const Man = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const toggleCategory = (category) => {
+    setSelectedCategories(prev => ({
+      ...prev,
+      [category]: !prev[category]
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -221,9 +234,30 @@ const Man = () => {
           </div>
           
           <div className="form-row center">
-            <button type="button" className="form-btn">Atasan</button>
-            <button type="button" className="form-btn">Bawahan</button>
-            <button type="button" className="form-btn">Footwear</button>
+            <button 
+              type="button" 
+              className={`form-btn ${selectedCategories.atasan ? 'selected' : ''}`}
+              onClick={() => toggleCategory('atasan')}
+            >
+              Atasan
+              {selectedCategories.atasan && <span className="checkmark">✓</span>}
+            </button>
+            <button 
+              type="button" 
+              className={`form-btn ${selectedCategories.bawahan ? 'selected' : ''}`}
+              onClick={() => toggleCategory('bawahan')}
+            >
+              Bawahan
+              {selectedCategories.bawahan && <span className="checkmark">✓</span>}
+            </button>
+            <button 
+              type="button" 
+              className={`form-btn ${selectedCategories.footwear ? 'selected' : ''}`}
+              onClick={() => toggleCategory('footwear')}
+            >
+              Footwear
+              {selectedCategories.footwear && <span className="checkmark">✓</span>}
+            </button>
           </div>
           
           <div className="form-row center">
