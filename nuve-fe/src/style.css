@@ -10,6 +10,7 @@
 
 body {
     font-family: Arial, sans-serif;
+    background-color: #e8e8e8;
 }
 
 .navbar {
@@ -139,6 +140,8 @@ body {
     margin: 0 auto;
     padding: 2rem 1rem 3rem 1rem;
     text-align: center;
+    background-color: #e8e8e8;
+    min-height: 100vh;
 }
 
 .man-title {
