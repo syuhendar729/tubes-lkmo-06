@@ -78,7 +78,7 @@ const Woman = () => {
       </nav>
 
       <main className="man-main">
-        <h1 className="man-title">women rekomendasi outfit</h1>
+        <h1 className="man-title">woman rekomendasi outfit</h1>
         
         <div className="man-figure-section">
           <div className="clothing-display">

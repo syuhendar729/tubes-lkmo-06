@@ -62,24 +62,23 @@ const Recommendation = ({ gender }) => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  // Menggunakan path relatif dari folder public atau langsung dari asset
-  const basePath = `/asset/asset-${gender}`;
+  const basePath = `../asset/asset-${gender}`;
 
   return (
     <div>
       <nav className="navbar">
         <div className="logo">NUVE'</div>
         <div className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <a href="#product">Product</a>
+          <a href="index.html">Home</a>
+          <a href="aboutus.html">About Us</a>
+          <a href="#women">Product</a>
           <div className="nav-dropdown">
             <a href="#" className="dropdown-toggle" onClick={(e) => { e.preventDefault(); toggleDropdown(); }}>
               Rekomendasi
             </a>
             <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-              <Link to="/man" className="dropdown-item">Man</Link>
-              <Link to="/woman" className="dropdown-item">Woman</Link>
+              <a href="man.html" className="dropdown-item">Man</a>
+              <a href="woman.html" className="dropdown-item">Woman</a>
             </div>
           </div>
         </div>
