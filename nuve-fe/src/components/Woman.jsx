@@ -7,9 +7,9 @@ const Woman = () => {
   
   // Asset paths for clothing items - WOMAN
   const clothingAssets = {
-    hat: ['basic hat.png', 'bucket hat.png', 'magic hat.png'],
-    shirt: ['kemeja.png', 'baju hitam.png', 'kemeja pendek.png'],
-    pants: ['jeans.png', 'black.png', 'cream.png']
+    hat: ['tapi biru.png', 'topi bunga.png', 'topi pita hitam.png'],
+    shirt: ['baju pink.png', 'baju pita putih.png', 'Baju putih.png'],
+    pants: ['celana coklat.png', 'celana hitam.png', 'celana kahaki.png']
   };
 
   const [currentSelection, setCurrentSelection] = useState({
