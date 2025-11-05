@@ -7,15 +7,15 @@ const Man = () => {
   
   // Asset paths for clothing items - MAN
   const clothingAssets = {
-    hat: ['basic hat.png', 'bucket hat.png', 'magic hat.png'],
-    shirt: ['kemeja.png', 'baju hitam.png', 'kemeja pendek.png'],
-    pants: ['jeans.png', 'black.png', 'cream.png']
+    shirt: ['Basic Cream Tee.png', 'Linen Breze.png', 'Street Core.png', 'Urban Layer.png', 'Varsity Nova.png'],
+    pants: ['Cargo Flex.png', 'Chill Track.png', 'Dark Taper.png', 'Denim Raw.png', 'Soft Linen Pants.png'],
+    footwear: ['Black Edge.png', 'High Rise.png', 'Sport Flex.png', 'Urban Trek.png', 'White Dash.png']
   };
 
   const [currentSelection, setCurrentSelection] = useState({
-    hat: 0,
     shirt: 0,
-    pants: 0
+    pants: 0,
+    footwear: 0
   });
 
   const [selectedCategories, setSelectedCategories] = useState({
@@ -96,11 +96,6 @@ const Man = () => {
         <div className="man-figure-section">
           <div className="clothing-display">
             <img 
-              className="clothing-item hat" 
-              src={`${basePath}/hat/${clothingAssets.hat[currentSelection.hat]}`}
-              alt="Hat"
-            />
-            <img 
               className="clothing-item shirt" 
               src={`${basePath}/shirt/${clothingAssets.shirt[currentSelection.shirt]}`}
               alt="Shirt"
@@ -110,22 +105,12 @@ const Man = () => {
               src={`${basePath}/pants/${clothingAssets.pants[currentSelection.pants]}`}
               alt="Pants"
             />
+            <img 
+              className="clothing-item footwear" 
+              src={`${basePath}/footwear/${clothingAssets.footwear[currentSelection.footwear]}`}
+              alt="Footwear"
+            />
           </div>
-          
-          <button 
-            type="button" 
-            className="arrow-btn left head-left"
-            onClick={() => handleArrowClick('hat', 'left')}
-          >
-            &#60;
-          </button>
-          <button 
-            type="button" 
-            className="arrow-btn right head-right"
-            onClick={() => handleArrowClick('hat', 'right')}
-          >
-            &#62;
-          </button>
           
           <button 
             type="button" 
@@ -144,15 +129,30 @@ const Man = () => {
           
           <button 
             type="button" 
-            className="arrow-btn left bottom-left"
+            className="arrow-btn left middle-left"
             onClick={() => handleArrowClick('pants', 'left')}
           >
             &#60;
           </button>
           <button 
             type="button" 
-            className="arrow-btn right bottom-right"
+            className="arrow-btn right middle-right"
             onClick={() => handleArrowClick('pants', 'right')}
+          >
+            &#62;
+          </button>
+          
+          <button 
+            type="button" 
+            className="arrow-btn left bottom-left"
+            onClick={() => handleArrowClick('footwear', 'left')}
+          >
+            &#60;
+          </button>
+          <button 
+            type="button" 
+            className="arrow-btn right bottom-right"
+            onClick={() => handleArrowClick('footwear', 'right')}
           >
             &#62;
           </button>

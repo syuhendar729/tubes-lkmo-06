@@ -178,29 +178,29 @@ body {
 }
 
 .clothing-item {
-    max-width: 280px;
-    max-height: 220px;
+    max-width: 350px;
+    max-height: 280px;
     object-fit: contain;
     display: block;
     margin: -20px 0;
 }
 
-.clothing-item.hat {
+.clothing-item.shirt {
     z-index: 3;
-    max-width: 180px;
-    max-height: 150px;
     margin-bottom: -40px;
 }
 
-.clothing-item.shirt {
+.clothing-item.pants {
     z-index: 2;
     margin-top: -40px;
     margin-bottom: -40px;
 }
 
-.clothing-item.pants {
+.clothing-item.footwear {
     z-index: 1;
     margin-top: -40px;
+    max-width: 280px;
+    max-height: 200px;
 }
 
 .man-arrows {
@@ -256,33 +256,33 @@ body {
 }
 
 /* Arrow button positions */
-.arrow-btn.head-left {
-    top: 65px;
-    left: 200px;
-}
-
-.arrow-btn.head-right {
-    top: 65px;
-    right: 200px;
-}
-
 .arrow-btn.top-left {
-    top: 170px;
+    top: 130px;
     left: 200px;
 }
 
 .arrow-btn.top-right {
-    top: 170px;
+    top: 130px;
+    right: 200px;
+}
+
+.arrow-btn.middle-left {
+    top: 300px;
+    left: 200px;
+}
+
+.arrow-btn.middle-right {
+    top: 300px;
     right: 200px;
 }
 
 .arrow-btn.bottom-left {
-    top: 310px;
+    top: 470px;
     left: 200px;
 }
 
 .arrow-btn.bottom-right {
-    top: 310px;
+    top: 470px;
     right: 200px;
 }
 
