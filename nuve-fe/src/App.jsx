@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, Men, Women } from './components';
+import { Home, Man, Woman } from './components';
 import './style.css';
 
 function App() {
