@@ -77,7 +77,7 @@ const Man = () => {
         <div className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/about">About Us</Link>
-          <a href="#product">Product</a>
+          <Link to="/product">Product</Link>
           <div className="nav-dropdown">
             <a href="#" className="dropdown-toggle" onClick={(e) => { e.preventDefault(); toggleDropdown(); }}>
               Rekomendasi
