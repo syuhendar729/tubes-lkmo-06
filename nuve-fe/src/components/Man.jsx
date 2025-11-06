@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Recommendation.css';
 
 const Man = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [productData, setProductData] = useState({
+    top: [],
+    down: [],
+    footwear: []
+  });
   
   // Asset paths for clothing items - MAN
   const clothingAssets = {
@@ -33,6 +38,30 @@ const Man = () => {
     budget: ''
   });
 
+  const [recommendations, setRecommendations] = useState({
+    atasan: [],
+    bawahan: [],
+    footwear: []
+  });
+
+  const [showRecommendations, setShowRecommendations] = useState(false);
+
+  // Fetch product data from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/products?gender=man');
+        const data = await response.json();
+        console.log('Data fetched from API:', data);
+        setProductData(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    
+    fetchProducts();
+  }, []);
+
   const handleArrowClick = (part, direction) => {
     const assets = clothingAssets[part];
     const maxIndex = assets.length - 1;
@@ -48,7 +77,19 @@ const Man = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    if (name === 'budget') {
+      // Remove all non-numeric characters
+      const numericValue = value.replace(/\D/g, '');
+      
+      // Format with dots every 3 digits
+      const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      
+      // Add Rp. prefix
+      setFormData(prev => ({ ...prev, [name]: formattedValue ? `Rp. ${formattedValue}` : '' }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const toggleCategory = (category) => {
@@ -58,14 +99,104 @@ const Man = () => {
     }));
   };
 
+  const generateAllRecommendations = () => {
+    console.log('=== Generate Recommendations ===');
+    console.log('Product Data:', productData);
+    console.log('Selected Categories:', selectedCategories);
+    console.log('Budget:', formData.budget);
+    
+    // Check if form is filled
+    const isFormFilled = formData.umur && formData.lokasi && formData.aktivitas && 
+                         formData.pekerjaan && formData.budget;
+    
+    if (!isFormFilled) {
+      alert('Mohon lengkapi semua data form terlebih dahulu!');
+      return;
+    }
+
+    // Check if at least one category is selected
+    if (!selectedCategories.atasan && !selectedCategories.bawahan && !selectedCategories.footwear) {
+      alert('Mohon pilih minimal satu kategori (Atasan, Bawahan, atau Footwear)!');
+      return;
+    }
+
+    const budgetValue = parseInt(formData.budget.replace(/\D/g, ''));
+    console.log('Budget Value (parsed):', budgetValue);
+    
+    const newRecommendations = {
+      atasan: [],
+      bawahan: [],
+      footwear: []
+    };
+
+    // Generate recommendations for each selected category
+    if (selectedCategories.atasan) {
+      const products = productData.top || [];
+      console.log('Atasan products:', products);
+      const filteredProducts = products.filter(product => {
+        const productPrice = parseInt(product.harga.replace(/\D/g, ''));
+        console.log(`Product: ${product.nama}, Price: ${productPrice}, Budget: ${budgetValue}`);
+        return productPrice <= budgetValue;
+      });
+      console.log('Atasan filtered:', filteredProducts);
+      // Always show products, if filtered is empty, show all
+      newRecommendations.atasan = filteredProducts.length > 0 ? filteredProducts : products;
+    }
+
+    if (selectedCategories.bawahan) {
+      const products = productData.down || [];
+      console.log('Bawahan products:', products);
+      const filteredProducts = products.filter(product => {
+        const productPrice = parseInt(product.harga.replace(/\D/g, ''));
+        console.log(`Product: ${product.nama}, Price: ${productPrice}, Budget: ${budgetValue}`);
+        return productPrice <= budgetValue;
+      });
+      console.log('Bawahan filtered:', filteredProducts);
+      // Always show products, if filtered is empty, show all
+      newRecommendations.bawahan = filteredProducts.length > 0 ? filteredProducts : products;
+    }
+
+    if (selectedCategories.footwear) {
+      const products = productData.footwear || [];
+      console.log('Footwear products:', products);
+      const filteredProducts = products.filter(product => {
+        const productPrice = parseInt(product.harga.replace(/\D/g, ''));
+        console.log(`Product: ${product.nama}, Price: ${productPrice}, Budget: ${budgetValue}`);
+        return productPrice <= budgetValue;
+      });
+      console.log('Footwear filtered:', filteredProducts);
+      // Always show products, if filtered is empty, show all
+      newRecommendations.footwear = filteredProducts.length > 0 ? filteredProducts : products;
+    }
+
+    console.log('Final Recommendations:', newRecommendations);
+    setRecommendations(newRecommendations);
+    setShowRecommendations(true);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Add your submit logic here
+    generateAllRecommendations();
   };
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  // Get current product details
+  const getCurrentProduct = (category) => {
+    if (!productData[category] || productData[category].length === 0) return null;
+    
+    let index;
+    if (category === 'top') {
+      index = currentSelection.shirt;
+    } else if (category === 'down') {
+      index = currentSelection.pants;
+    } else {
+      index = currentSelection.footwear;
+    }
+    
+    return productData[category][index];
   };
 
   const basePath = `/asset/asset-man`;
@@ -226,7 +357,7 @@ const Man = () => {
                 type="text" 
                 id="budget" 
                 name="budget" 
-                placeholder="Masukkan budget"
+                placeholder="Rp. 0"
                 value={formData.budget}
                 onChange={handleInputChange}
               />
@@ -264,6 +395,96 @@ const Man = () => {
             <button type="submit" className="submit-btn">Minta rekomendasi</button>
           </div>
         </form>
+
+        {/* Recommendation Results Section */}
+        {showRecommendations && (
+          <div className="recommendation-section">
+            <h2 className="recommendation-title">Rekomendasi Produk Untuk Anda</h2>
+            <p className="recommendation-subtitle">
+              Kami merekomendasikan kamu untuk menggunakan 
+              {selectedCategories.atasan && " Atasan"}{selectedCategories.atasan && selectedCategories.bawahan && ","} 
+              {selectedCategories.bawahan && " Bawahan"}{selectedCategories.bawahan && selectedCategories.footwear && ","} 
+              {selectedCategories.footwear && " Footwear"}
+            </p>
+            <p className="recommendation-info">
+              Dari situ produk yang tepat untuk kamu pilih adalah:
+            </p>
+
+            {/* Debug Info */}
+            <div style={{display: 'none'}}>
+              Atasan selected: {selectedCategories.atasan ? 'Yes' : 'No'}, 
+              Length: {recommendations.atasan?.length || 0}
+              <br/>
+              Bawahan selected: {selectedCategories.bawahan ? 'Yes' : 'No'}, 
+              Length: {recommendations.bawahan?.length || 0}
+              <br/>
+              Footwear selected: {selectedCategories.footwear ? 'Yes' : 'No'}, 
+              Length: {recommendations.footwear?.length || 0}
+            </div>
+
+            <div className="recommendation-grid">
+              {selectedCategories.atasan && (
+                <div className="category-recommendations">
+                  <h3>Atasan</h3>
+                  {recommendations.atasan && recommendations.atasan.length > 0 ? (
+                    <div className="product-list">
+                      {recommendations.atasan.map((product, index) => (
+                        <div key={index} className="product-card">
+                          <p className="product-name">{product.nama}</p>
+                          <p className="product-type">{product.jenis}</p>
+                          <p className="product-price">{product.harga}</p>
+                          <p className="product-desc">{product.deskripsi}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p>Memuat produk... (Data: {JSON.stringify(productData.top?.length || 0)} produk tersedia)</p>
+                  )}
+                </div>
+              )}
+
+              {selectedCategories.bawahan && (
+                <div className="category-recommendations">
+                  <h3>Bawahan</h3>
+                  {recommendations.bawahan && recommendations.bawahan.length > 0 ? (
+                    <div className="product-list">
+                      {recommendations.bawahan.map((product, index) => (
+                        <div key={index} className="product-card">
+                          <p className="product-name">{product.nama}</p>
+                          <p className="product-type">{product.jenis}</p>
+                          <p className="product-price">{product.harga}</p>
+                          <p className="product-desc">{product.deskripsi}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p>Memuat produk... (Data: {JSON.stringify(productData.down?.length || 0)} produk tersedia)</p>
+                  )}
+                </div>
+              )}
+
+              {selectedCategories.footwear && (
+                <div className="category-recommendations">
+                  <h3>Footwear</h3>
+                  {recommendations.footwear && recommendations.footwear.length > 0 ? (
+                    <div className="product-list">
+                      {recommendations.footwear.map((product, index) => (
+                        <div key={index} className="product-card">
+                          <p className="product-name">{product.nama}</p>
+                          <p className="product-type">{product.jenis}</p>
+                          <p className="product-price">{product.harga}</p>
+                          <p className="product-desc">{product.deskripsi}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p>Memuat produk... (Data: {JSON.stringify(productData.footwear?.length || 0)} produk tersedia)</p>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
