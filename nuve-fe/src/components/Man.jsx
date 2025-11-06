@@ -222,7 +222,7 @@ const Man = () => {
       </nav>
 
       <main className="man-main">
-        <h1 className="man-title">man rekomendasi outfit</h1>
+        <h1 className="man-title">MAN RECOMMENDATION OUTFIT</h1>
         
         <div className="man-figure-section">
           <div className="clothing-display">
