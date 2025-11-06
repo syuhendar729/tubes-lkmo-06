@@ -1,0 +1,125 @@
+/* Mengimpor style dasar */
+@import url('../style.css');
+
+.product-detail-container {
+  width: 100%;
+  min-height: calc(100vh - 80px); /* 80px adalah tinggi navbar (approx) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f4f4f4; /* Latar belakang abu-abu muda */
+}
+
+.product-detail-card {
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+/* Sisi Kiri: Gambar */
+.detail-image-wrapper {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.detail-image {
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+/* Sisi Kanan: Info */
+.detail-info-wrapper {
+  flex: 1;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-header {
+  margin-bottom: 1rem;
+}
+
+.detail-title-bg {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000;
+  background-color: #e0e0e0;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+}
+
+.detail-colors {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-left: 0.5rem;
+}
+
+/* Kotak Info (Kategori, Harga, Deskripsi) */
+.detail-info-box {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+}
+
+.detail-info-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.detail-info-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  flex-basis: 120px; /* Lebar tetap untuk label */
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  background-color: #e0e0e0;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+.detail-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #222;
+  background-color: #e0e0e0;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+}
+
+/* Deskripsi bisa lebih panjang */
+.detail-value.desc {
+  border-radius: 15px;
+  line-height: 1.6;
+  flex: 1; /* Agar bisa memanjang */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-detail-card {
+    flex-direction: column;
+  }
+  .detail-info-wrapper {
+    padding: 2rem 1.5rem;
+  }
+}

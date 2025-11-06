@@ -1,4 +1,3 @@
-/* Mengimpor style dasar */
 @import url('../style.css');
 
 .product-page-container {
@@ -16,7 +15,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   font-weight: 700;
-  text-transform: capitalize; /* Sesuai gambar "men produck" */
+  text-transform: capitalize; /* Sesuai gambar "men product" */
   margin-bottom: 1.5rem;
   color: #000;
 }
@@ -82,6 +81,11 @@
   font-size: 0.9rem;
   color: #555;
   margin: 0;
+}
+
+.product-card-link {
+  text-decoration: none;
+  color: inherit; /* Mewarisi warna teks dari parent */
 }
 
 /* Responsive (2 kolom di tablet, 1 kolom di HP) */

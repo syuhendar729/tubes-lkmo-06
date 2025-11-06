@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // Impor data produk dari file JSON
 import manFashion from '../../../nuve-be/manFashion.json';
 import womanFashion from '../../../nuve-be/womanFashion.json';
+import './Product.css';
 
 // Impor CSS baru yang akan kita buat
 import './Product.css';
@@ -37,26 +38,28 @@ const getImagePath = (product, gender) => {
 
 // Komponen Card untuk setiap produk
 const ProductCard = ({ product, gender }) => (
-  <div className="product-card">
-    <div className="product-card-image-wrapper">
-      <img 
-        src={getImagePath(product, gender)} 
-        alt={product.nama} 
-        className="product-card-img" 
-      />
-    </div>
-    <div className="product-card-details">
-      {/* Swatch warna (hardcoded sesuai gambar, karena tidak ada di JSON) */}
-      <div className="product-colors">
-        <span className="color-swatch" style={{ backgroundColor: '#D9D9D9', border: '1px solid #ccc' }}></span>
-        <span className="color-swatch" style={{ backgroundColor: '#333' }}></span>
-        <span className="color-swatch" style={{ backgroundColor: '#5874A6' }}></span>
-        <span className="color-swatch" style={{ backgroundColor: '#A65858' }}></span>
+  <Link to={`/product/${product.nama}`} className="product-card-link">
+    <div className="product-card">
+      <div className="product-card-image-wrapper">
+        <img 
+          src={getImagePath(product, gender)} 
+          alt={product.nama} 
+          className="product-card-img" 
+        />
       </div>
-      <h3 className="product-card-name">{product.nama}</h3>
-      <p className="product-card-price">{product.harga}</p>
+      <div className="product-card-details">
+        {/* ... (bagian swatch warna) ... */}
+        <div className="product-colors">
+          <span className="color-swatch" style={{ backgroundColor: '#D9D9D9', border: '1px solid #ccc' }}></span>
+          <span className="color-swatch" style={{ backgroundColor: '#333' }}></span>
+          <span className="color-swatch" style={{ backgroundColor: '#5874A6' }}></span>
+          <span className="color-swatch" style={{ backgroundColor: '#A65858' }}></span>
+        </div>
+        <h3 className="product-card-name">{product.nama}</h3>
+        <p className="product-card-price">{product.harga}</p>
+      </div>
     </div>
-  </div>
+  </Link>
 );
 
 const Product = () => {
