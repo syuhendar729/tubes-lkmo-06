@@ -109,7 +109,7 @@ body {
 }
 
 .aboutus-title {
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive; 
+    font-family: 'Arial', 'Arial', cursive; 
     font-size: 2.5rem;
     margin-bottom: 2.5rem;
     margin-left: 1.5rem;
@@ -129,7 +129,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    font-family: 'Futura', 'Futura', cursive;
     color: #222;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }

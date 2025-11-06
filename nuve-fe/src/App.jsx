@@ -1,6 +1,12 @@
+// App.jsx (ganti bagian import dengan ini)
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, Man, Woman } from './components';
+
+import Home from './components/Home';
+import AboutUs from './components/AboutUs';
+import Man from './components/Man';
+import Woman from './components/Woman';
+
 import './style.css';
 
 function App() {
@@ -8,6 +14,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/man" element={<Man />} />
         <Route path="/woman" element={<Woman />} />
       </Routes>

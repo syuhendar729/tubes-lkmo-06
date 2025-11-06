@@ -1,0 +1,112 @@
+/* AboutUs.css - updated for title left-top, desc bottom-center, image smaller */
+.aboutus-page {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 0px);
+  overflow: hidden;
+  background: #e6e6e6; /* fallback warna bila gambar tidak tersedia */
+}
+
+/* Navbar area (same as Home) */
+.about-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(2px);
+}
+
+/* background image - slightly scaled down so full model more likely visible */
+.aboutus-bg {
+  position: absolute;
+  inset: 0;
+  /* make the image a bit smaller than full width so it fits more fully */
+  background-size: 90% auto;        /* <-- key: scale image to 90% width */
+  background-position: center top;  /* focus near top so models show */
+  background-repeat: no-repeat;
+  z-index: 1;
+  filter: brightness(0.98) saturate(1.02);
+  transition: transform 0.4s ease;
+}
+
+/* Overlay content above bg */
+.aboutus-overlay {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  box-sizing: border-box;
+}
+
+/* TITLE placed at left-top, below navbar */
+.aboutus-title {
+  position: absolute;
+  top: 35px; /* adjust gap from top (accounting navbar height). Tweak if your navbar height differs */
+  left: 50px;
+  margin: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 800;
+  font-size: 34px;
+  color: #111;
+  letter-spacing: 2px;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  z-index: 6;
+  background: rgba(255,255,255,0.0); /* transparent, but can change if you want a pill */
+}
+
+/* Description card positioned at bottom center */
+.aboutus-description {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0px; /* distance from bottom - tweak as needed */
+  width: min(980px, 86%);
+  background: rgba(255,255,255,0.16);
+  border-radius: 18px;
+  padding: 28px 36px;
+  box-shadow: 0 22px 46px rgba(0,0,0,0.25);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(2px);
+  color: #0b0b0b;
+  font-size: 18px;
+  line-height: 1.7;
+  text-align: justify;
+  z-index: 6;
+}
+
+/* paragraph spacing */
+.aboutus-description p {
+  margin: 0 0 12px 0;
+}
+
+/* RESPONSIVE tweaks */
+@media (max-width: 1024px) {
+  .aboutus-bg { background-size: 95% auto; background-position: center top; }
+  .aboutus-title {
+    top: 72px;
+    left: 24px;
+    font-size: 28px;
+  }
+  .aboutus-description {
+    width: 92%;
+    font-size: 16px;
+    padding: 20px;
+    bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutus-bg { background-size: cover; background-position: center; } /* on small screens make it cover so no blank areas */
+  .aboutus-title {
+    top: 64px;
+    left: 18px;
+    font-size: 22px;
+  }
+  .aboutus-description {
+    width: 92%;
+    font-size: 15px;
+    padding: 16px;
+    border-radius: 12px;
+    bottom: 28px;
+  }
+}
