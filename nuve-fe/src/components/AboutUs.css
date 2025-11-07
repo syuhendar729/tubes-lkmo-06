@@ -1,3 +1,6 @@
+@import url('../style.css');
+
+
 /* AboutUs.css - updated for title left-top, desc bottom-center, image smaller */
 .aboutus-page {
   position: relative;

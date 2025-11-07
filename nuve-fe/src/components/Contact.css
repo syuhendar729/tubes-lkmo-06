@@ -1,0 +1,201 @@
+@import url('../style.css');
+
+/* Contact.css — AboutUs-like layout with bottom contact bar */
+.contact-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #e9e9e9; /* fallback */
+  overflow: hidden;
+}
+
+/* Navbar stays on top */
+.contact-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(2px);
+}
+
+/* background image (full cover) */
+.contact-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.95);
+}
+
+/* overlay content sits above bg */
+.contact-overlay {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* title top-center */
+.contact-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px 8px 16px;
+}
+
+.contact-title {
+  margin: 0;
+  font-family: 'Montserrat', 'Courier New', Courier, monospace;
+  font-weight: 800;
+  font-size: 42px;
+  color: #111;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* description centered middle */
+.contact-main {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom : 40px;
+  padding-top: 12px;
+  box-sizing: border-box;
+}
+
+.contact-desc {
+  max-width: 900px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #111;
+  text-align: center;
+
+  /* 💡 ini bagian barunya */
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 28px;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  backdrop-filter: blur(3px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-desc:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.2);
+}
+
+
+/* wrapper for bottom bar: keep it at bottom */
+.contact-actions-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 28px 20px 56px 20px;
+  box-sizing: border-box;
+  pointer-events: none; /* allow inner anchors to receive hover/click easily */
+}
+
+/* bottom action row (cards inline) */
+.contact-actions {
+  pointer-events: auto;
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap; /* wraps in small screen */
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* each contact card */
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 260px;
+  background: rgba(255,255,255,0.92);
+  padding: 14px 18px;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.14);
+  text-decoration: none;
+  color: inherit;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.18);
+}
+
+/* icon area */
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.contact-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* text inside card */
+.card-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.card-sub {
+  font-size: 14px;
+  color: #333;
+}
+
+/* RESPONSIVE: on small screens stack vertically */
+@media (max-width: 900px) {
+  .contact-actions {
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .contact-card {
+    min-width: 92%;
+    max-width: 92%;
+  }
+
+  .contact-title {
+    font-size: 32px;
+  }
+
+  .contact-desc {
+    font-size: 16px;
+  }
+
+  .contact-icon { width: 40px; height: 40px; }
+  .contact-icon img { width: 22px; height: 22px; }
+}
+
+/* small tweaks for very small phones */
+@media (max-width: 420px) {
+  .contact-title { font-size: 26px; }
+  .card-title { font-size: 14px; }
+  .card-sub { font-size: 13px; }
+  .contact-actions-wrapper { padding-bottom: 36px; }
+}

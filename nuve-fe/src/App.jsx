@@ -6,6 +6,7 @@ import Home from './components/Home';
 import AboutUs from './components/AboutUs';
 import Man from './components/Man';
 import Woman from './components/Woman';
+import Contact from './components/Contact';
 
 import './style.css';
 
@@ -15,8 +16,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/man" element={<Man />} />
         <Route path="/woman" element={<Woman />} />
+        
       </Routes>
     </Router>
   );
