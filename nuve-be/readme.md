@@ -29,8 +29,6 @@ PORT=5000
 
 Catatan: backend ini menggunakan Google Gemini via paket `@google/generative-ai`. Pastikan Anda memiliki API key yang valid.
 
-## Menjalankan server
-
 ```bash
 npm start
 ```
@@ -46,6 +44,8 @@ Secara default server berjalan pada `PORT` dari `.env` atau `5000`.
 
 ## API Rekomendasi Fashion
 Endpoint : POST /api/rekomendasi-fashion
+
+API Public URL: https://nuve-be.vercel.app/api/rekomendasi-fashion
 
 Request Body :
 
@@ -79,6 +79,8 @@ Response Body (Failed) :
 ## API Get All Products
 Endpoint : GET /api/products
 
+API Public URL: https://nuve-be.vercel.app/api/products
+
 Terdapat 2 gender sebagai input parameter:
 - `man`
 - `woman`
@@ -90,17 +92,17 @@ Terdapat 3 jenis pakaian yang menjadi respon dari API:
 
 Request Params :
 
-```curl
+```json
 # All Products
-http://localhost:5000/api/products"
+https://nuve-be.vercel.app/api/products
 ```
-```curl
+```json
 # All Man Products
-http://localhost:5000/api/products?gender=man"
+https://nuve-be.vercel.app/api/products?gender=man
 ```
-```curl
+```json
 # All Woman Products
-http://localhost:5000/api/products?gender=woman"
+https://nuve-be.vercel.app/api/products?gender=woman
 ```
 
 Response Body (Success) : 
@@ -168,25 +170,26 @@ Response Body (Failed) :
 ```
 
 ## API Detail Product
-Endpoint : POST /api/product/detail
+Endpoint : GET /api/product/{id}
+
+API Public URL: https://nuve-be.vercel.app/api/product/{id}
+
 Request Body :
 
 ```json
-{
-    "umur":"28",
-    "jenis_kelamin":"Wanita",
-    "pekerjaan":"Marketing",
-    "lokasi":"Bandung",
-    "aktivitas":"Meeting dan event",
-    "budget":"Rp 500.000 - Rp 1.500.000",
-}
+# Get Detail Product by ID
+https://nuve-be.vercel.app/api/product/mantop01
 ```
 
 Response Body (Success) : 
 
 ```json
 {
-	"rekomendasi": "Paragraph text with the recommendation returned by Gemini"
+    "nama": "Varsity Nova",
+    "jenis": "Jaket",
+    "harga": "Rp 189.000",
+    "deskripsi": "Jaket varsity dengan bahan fleece lembut dan desain klasik bergaya retro.",
+    "id": "mantop01"
 }
 ```
 
@@ -194,7 +197,7 @@ Response Body (Failed) :
 
 ```json
 {
-    "error": "Gagal mendapatkan rekomendasi dari Gemini"
+    "error": "Produk tidak ditemukan"
 }
 ```
 
