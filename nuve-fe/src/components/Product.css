@@ -1,0 +1,106 @@
+@import url('../style.css');
+
+.product-page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 4%;
+  background-color: #ffffff; /* Latar belakang putih seperti di gambar */
+}
+
+.product-section {
+  margin-bottom: 3rem;
+}
+
+.product-section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: capitalize; /* Sesuai gambar "men product" */
+  margin-bottom: 1.5rem;
+  color: #000;
+}
+
+/* Tata letak grid 4 kolom */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* Styling untuk setiap kartu produk */
+.product-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.product-card-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Membuat gambar persegi */
+  background-color: #f9f9f9; /* Warna latar belakang jika gambar transparan */
+}
+
+.product-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Memastikan gambar memenuhi kotak */
+}
+
+.product-card-details {
+  padding: 0.75rem;
+}
+
+.product-colors {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.color-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: block;
+}
+
+.product-card-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: #222;
+}
+
+.product-card-price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
+.product-card-link {
+  text-decoration: none;
+  color: inherit; /* Mewarisi warna teks dari parent */
+}
+
+/* Responsive (2 kolom di tablet, 1 kolom di HP) */
+@media (max-width: 992px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .product-section-title {
+    font-size: 1.5rem;
+  }
+}

@@ -3,3 +3,5 @@ node_modules/
 config/ServiceAccount.json
 .env
 .github/
+
+.DS_Store/

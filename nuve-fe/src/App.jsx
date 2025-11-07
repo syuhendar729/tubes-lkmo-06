@@ -6,6 +6,8 @@ import Home from './components/Home';
 import AboutUs from './components/AboutUs';
 import Man from './components/Man';
 import Woman from './components/Woman';
+import Product from './components/Product';
+import ProductDetail from './components/ProductDetail';
 import Contact from './components/Contact';
 
 import './style.css';
@@ -15,8 +17,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<AboutUs />} />\
+        <Route path="/product" element={<Product />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/man" element={<Man />} />
         <Route path="/woman" element={<Woman />} />
         
