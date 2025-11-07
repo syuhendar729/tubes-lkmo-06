@@ -9,7 +9,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Cormorant;
     background-color: #e8e8e8;
 }
 
@@ -109,7 +109,7 @@ body {
 }
 
 .aboutus-title {
-    font-family: 'Arial', 'Arial', cursive; 
+    font-family: 'Cormorant'; 
     font-size: 2.5rem;
     margin-bottom: 2.5rem;
     margin-left: 1.5rem;
@@ -129,7 +129,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    font-family: 'Futura', 'Futura', cursive;
+    font-family: 'Cormorant';
     color: #222;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }

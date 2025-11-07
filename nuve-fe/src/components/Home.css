@@ -28,7 +28,7 @@
   margin: 0;
   line-height: 1;
   color: #000;
-  font-family: Arial, sans-serif;
+  font-family: Cormorant;
 }
 
 .tagline {
@@ -36,23 +36,23 @@
   font-weight: 700;
   margin: 0.5rem 0 2rem 0;
   color: #000;
-  font-family: Arial, sans-serif;
+  font-family: Cormorant;
 }
 
 .description {
-  font-size: 1rem;
+  font-size: 1.15rem;
   line-height: 1.8;
   color: #000;
   max-width: 500px;
   text-align: justify;
-  font-family: Arial, sans-serif;
+  font-family: Playfair Display;
 }
 
 /* ==== HERO IMAGE AREA ==== */
 .hero-image {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: right;
+  align-items: right;
   height: 100%;
   overflow: hidden;
 }
@@ -62,8 +62,7 @@
   width: 100%;
   max-width: 620px;
   height: auto;
-  object-fit: cover;
-  object-position: center right; /* fokus di kanan */
+  object-position: right; /* fokus di kanan */
   border-radius: 12px;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -124,7 +123,7 @@
   }
 
   .hero-image img {
-    max-width: 400px;
-    width: 90%;
+    max-width: 500px;
+    width: 100%;
   }
 }
