@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-
-// Impor data produk
-import manFashion from '../../../nuve-be/manFashion.json';
-import womanFashion from '../../../nuve-be/womanFashion.json';
-
-// Impor CSS baru yang akan kita buat
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import './ProductDetail.css';
 
-// Fungsi bantuan untuk mendapatkan path gambar
-// (Sama seperti di Product.jsx, tapi kita akan tahu gendernya)
+// Fungsi getImagePath 
 const getImagePath = (product, gender) => {
   const genderPath = gender === 'man' ? 'asset-man' : 'asset-womam';
   let categoryPath = 'shirt';
+  if (!product || !product.jenis) return '/asset/placeholder.png';
   const type = product.jenis.toLowerCase();
-
   if (['jaket', 'hoodie', 'kemeja', 'kaos', 'sweater', 'blouse', 'cardigan', 'outer', 'tank top'].includes(type)) {
     categoryPath = 'shirt';
   } else if (['celana', 'rok', 'dress', 'jeans'].includes(type)) {
@@ -22,56 +15,93 @@ const getImagePath = (product, gender) => {
   } else if (['sepatu'].includes(type)) {
     categoryPath = gender === 'man' ? 'footwear' : 'footware';
   }
-  
   return `/asset/${genderPath}/${categoryPath}/${product.nama}.png`;
 };
 
+
 const ProductDetail = () => {
+  const { id } = useParams(); 
+  const [product, setProduct] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { productName } = useParams(); // Mengambil nama produk dari URL
+  const [gender, setGender] = useState('man');
 
-  let product = null;
-  let gender = null;
-  let category = null;
+  useEffect(() => {
+    if (id && id.startsWith('woma')) {
+      setGender('woman');
+    } else {
+      setGender('man');
+    }
 
-  // Fungsi untuk mencari produk di semua kategori JSON
-  const findProduct = (name) => {
-    const formattedName = name.toLowerCase();
-    
-    product = manFashion.top.find(p => p.nama.toLowerCase() === formattedName);
-    if (product) { gender = 'man'; category = 'Atasan'; return; }
+    const fetchDetail = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const apiURL = `http://nuve-be.vercel.app/api/product/${id}`;
+        const response = await fetch(apiURL);
+        
+        if (!response.ok) {
+          throw new Error('Produk tidak ditemukan'); 
+        }
+        
+        const data = await response.json();
+        setProduct(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    product = manFashion.down.find(p => p.nama.toLowerCase() === formattedName);
-    if (product) { gender = 'man'; category = 'Bawahan'; return; }
-
-    product = manFashion.footwear.find(p => p.nama.toLowerCase() === formattedName);
-    if (product) { gender = 'man'; category = 'Footwear'; return; }
-
-    product = womanFashion.top.find(p => p.nama.toLowerCase() === formattedName);
-    if (product) { gender = 'woman'; category = 'Atasan'; return; }
-
-    product = womanFashion.down.find(p => p.nama.toLowerCase() === formattedName);
-    if (product) { gender = 'woman'; category = 'Bawahan'; return; }
-
-    product = womanFashion.footwear.find(p => p.nama.toLowerCase() === formattedName);
-    if (product) { gender = 'woman'; category = 'Footwear'; return; }
-  };
-
-  findProduct(productName);
+    if (id) {
+      fetchDetail();
+    }
+  }, [id]);
 
   const toggleDropdown = (e) => {
     if (e) e.preventDefault();
     setDropdownOpen((s) => !s);
   };
 
-  // Jika produk tidak ditemukan
-  if (!product) {
-    return <div>Produk tidak ditemukan.</div>;
-  }
+  const renderContent = () => {
+    if (isLoading) {
+      return <p className="detail-status">Memuat produk...</p>;
+    }
+    if (error) {
+      return <p className="detail-status">Error: {error}</p>;
+    }
+    if (!product) {
+      return <p className="detail-status">Produk tidak ditemukan.</p>;
+    }
+
+    return (
+      <div className="product-detail-layout">
+        <div className="product-detail-image">
+          <img src={getImagePath(product, gender)} alt={product.nama} />
+        </div>
+        <div className="product-detail-info">
+          <span className="detail-jenis-badge">{product.jenis}</span>
+          <h1 className="detail-nama">{product.nama}</h1>
+          <p className="detail-harga">{product.harga}</p>
+          <div className="detail-info-grid">
+            <span className="info-label">Kategori :</span>
+            <span className="info-value">{product.jenis}</span>
+            
+            <span className="info-label">Harga :</span>
+            <span className="info-value">{product.harga}</span>
+
+            <span className="info-label">Deskripsi :</span>
+            <span className="info-value">{product.deskripsi}</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div>
-      {/* NAVBAR */}
+      {/* Navbar (Sama seperti halaman lain) */}
       <nav className="navbar">
         <div className="logo">NUVE'</div>
         <div className="nav-links">
@@ -91,49 +121,8 @@ const ProductDetail = () => {
         </div>
       </nav>
 
-      {/* Konten Detail Produk */}
       <main className="product-detail-container">
-        <div className="product-detail-card">
-          {/* Sisi Kiri: Gambar */}
-          <div className="detail-image-wrapper">
-            <img 
-              src={getImagePath(product, gender)} 
-              alt={product.nama} 
-              className="detail-image"
-            />
-          </div>
-
-          {/* Sisi Kanan: Info */}
-          <div className="detail-info-wrapper">
-            <div className="detail-header">
-              <span className="detail-title-bg">{product.jenis}</span>
-            </div>
-            
-            {/* Swatch warna (hardcoded) */}
-            <div className="detail-colors">
-              <span className="color-swatch" style={{ backgroundColor: '#D9D9D9', border: '1px solid #ccc' }}></span>
-              <span className="color-swatch" style={{ backgroundColor: '#333' }}></span>
-              <span className="color-swatch" style={{ backgroundColor: '#5874A6' }}></span>
-              <span className="color-swatch" style={{ backgroundColor: '#A65858' }}></span>
-            </div>
-
-            {/* Kotak Detail */}
-            <div className="detail-info-box">
-              <div className="detail-info-row">
-                <span className="detail-label">Kategori :</span>
-                <span className="detail-value">{category}</span>
-              </div>
-              <div className="detail-info-row">
-                <span className="detail-label">Harga :</span>
-                <span className="detail-value">{product.harga}</span>
-              </div>
-              <div className="detail-info-row">
-                <span className="detail-label">Deskripsi :</span>
-                <span className="detail-value desc">{product.deskripsi}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        {renderContent()}
       </main>
     </div>
   );

@@ -1,105 +1,98 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-// Impor data produk dari file JSON
-import manFashion from '../../../nuve-be/manFashion.json';
-import womanFashion from '../../../nuve-be/womanFashion.json';
 import './Product.css';
 
-// Impor CSS baru yang akan kita buat
-import './Product.css';
-
-// Fungsi bantuan untuk mendapatkan path gambar yang benar
-// Ini penting karena struktur folder aset Anda kompleks
+// Fungsi getImagePath (Tidak berubah)
 const getImagePath = (product, gender) => {
   const genderPath = gender === 'man' ? 'asset-man' : 'asset-womam';
-  let categoryPath = 'shirt'; // default
-  
-  if (!product || !product.jenis) {
-    return '/asset/placeholder.png'; // Gambar cadangan jika data error
-  }
-
+  let categoryPath = 'shirt';
+  if (!product || !product.jenis) return '/asset/placeholder.png';
   const type = product.jenis.toLowerCase();
-
-  // Mencocokkan 'jenis' dari JSON ke nama folder aset
   if (['jaket', 'hoodie', 'kemeja', 'kaos', 'sweater', 'blouse', 'cardigan', 'outer', 'tank top'].includes(type)) {
     categoryPath = 'shirt';
   } else if (['celana', 'rok', 'dress', 'jeans'].includes(type)) {
     categoryPath = 'pants';
   } else if (['sepatu'].includes(type)) {
-    // Perhatikan: ada typo di folder aset Anda ('footware' untuk wanita)
     categoryPath = gender === 'man' ? 'footwear' : 'footware';
   }
-
-  // Menggabungkan path
-  // Kita asumsikan nama file gambar sama dengan 'nama' di JSON + .png
   return `/asset/${genderPath}/${categoryPath}/${product.nama}.png`;
 };
 
-// Komponen Card untuk setiap produk
+// --- REVISI UTAMA DI SINI ---
 const ProductCard = ({ product, gender }) => (
-  <Link to={`/product/${product.nama}`} className="product-card-link">
-    <div className="product-card">
-      <div className="product-card-image-wrapper">
-        <img 
-          src={getImagePath(product, gender)} 
-          alt={product.nama} 
-          className="product-card-img" 
-        />
+  // Link diubah ke /product/id-produk
+  // Kita ASUMSIKAN 'product' sekarang punya properti 'id' (cth: "mantop01")
+  <Link 
+    to={`/product/${product.id}`} 
+    className="product-card"
+  >
+    <div className="product-card-image-wrapper">
+      <img 
+        src={getImagePath(product, gender)} 
+        alt={product.nama} 
+        className="product-card-img" 
+      />
+    </div>
+    <div className="product-card-details">
+      <div className="product-colors">
+        <span className="color-swatch" style={{ backgroundColor: '#D9D9D9', border: '1px solid #ccc' }}></span>
+        <span className="color-swatch" style={{ backgroundColor: '#333' }}></span>
+        <span className="color-swatch" style={{ backgroundColor: '#5874A6' }}></span>
+        <span className="color-swatch" style={{ backgroundColor: '#A65858' }}></span>
       </div>
-      <div className="product-card-details">
-        {/* ... (bagian swatch warna) ... */}
-        <div className="product-colors">
-          <span className="color-swatch" style={{ backgroundColor: '#D9D9D9', border: '1px solid #ccc' }}></span>
-          <span className="color-swatch" style={{ backgroundColor: '#333' }}></span>
-          <span className="color-swatch" style={{ backgroundColor: '#5874A6' }}></span>
-          <span className="color-swatch" style={{ backgroundColor: '#A65858' }}></span>
-        </div>
-        <h3 className="product-card-name">{product.nama}</h3>
-        <p className="product-card-price">{product.harga}</p>
-      </div>
+      <h3 className="product-card-name">{product.nama}</h3>
+      <p className="product-card-price">{product.harga}</p>
     </div>
   </Link>
 );
 
+// Sisa komponen (termasuk useEffect fetch) TIDAK BERUBAH
 const Product = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [manData, setManData] = useState({ top: [], down: [], footwear: [] });
+  const [womanData, setWomanData] = useState({ top: [], down: [], footwear: [] });
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleDropdown = (e) => {
     if (e) e.preventDefault();
     setDropdownOpen((s) => !s);
   };
 
-  // Gabungkan semua data produk dari JSON
-  const manProducts = [
-    ...manFashion.top,
-    ...manFashion.down,
-    ...manFashion.footwear
-  ];
-  
-  const womanProducts = [
-    ...womanFashion.top,
-    ...womanFashion.down,
-    ...womanFashion.footwear
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Panggilan API ini tetap sama
+        const response = await fetch('http://nuve-be.vercel.app/api/products');
+        if (!response.ok) {
+          throw new Error('Gagal mengambil data produk');
+        }
+        const data = await response.json();
+        // Pastikan data.man.top, dll... sekarang berisi 'id'
+        setManData(data.man || { top: [], down: [], footwear: [] });
+        setWomanData(data.woman || { top: [], down: [], footwear: [] });
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const manProducts = [...manData.top, ...manData.down, ...manData.footwear];
+  const womanProducts = [...womanData.top, ...womanData.down, ...womanData.footwear];
 
   return (
     <div>
-      {/* NAVBAR - Sama seperti di Home.jsx */}
+      {/* Navbar (Tidak berubah) */}
       <nav className="navbar">
         <div className="logo">NUVE'</div>
         <div className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/about">About Us</Link>
-          {/* Tautan "Product" sekarang menunjuk ke halaman ini */}
           <Link to="/product">Product</Link>
-
           <div className="nav-dropdown">
-            <a
-              href="#"
-              className="dropdown-toggle"
-              onClick={toggleDropdown}
-            >
+            <a href="#" className="dropdown-toggle" onClick={toggleDropdown}>
               Rekomendasi
             </a>
             <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
@@ -110,30 +103,31 @@ const Product = () => {
           <Link to="/contact">Contact</Link>
         </div>
       </nav>
-
-      {/* Konten Halaman Produk */}
+      
+      {/* Konten (Tidak berubah) */}
       <main className="product-page-container">
-        
-        {/* Bagian Pria */}
-        <section className="product-section">
-          <h1 className="product-section-title">Men Product</h1>
-          <div className="product-grid">
-            {manProducts.map((product) => (
-              <ProductCard key={product.nama} product={product} gender="man" />
-            ))}
-          </div>
-        </section>
-
-        {/* Bagian Wanita */}
-        <section className="product-section">
-          <h1 className="product-section-title">Women Product</h1>
-          <div className="product-grid">
-            {womanProducts.map((product) => (
-              <ProductCard key={product.nama} product={product} gender="woman" />
-            ))}
-          </div>
-        </section>
-
+        {isLoading ? (
+          <p style={{ textAlign: 'center' }}>Memuat produk...</p>
+        ) : (
+          <>
+            <section className="product-section">
+              <h1 className="product-section-title">Men Product</h1>
+              <div className="product-grid">
+                {manProducts.map((product) => (
+                  <ProductCard key={product.id || product.nama} product={product} gender="man" />
+                ))}
+              </div>
+            </section>
+            <section className="product-section">
+              <h1 className="product-section-title">Women Product</h1>
+              <div className="product-grid">
+                {womanProducts.map((product) => (
+                  <ProductCard key={product.id || product.nama} product={product} gender="woman" />
+                ))}
+              </div>
+            </section>
+          </>
+        )}
       </main>
     </div>
   );

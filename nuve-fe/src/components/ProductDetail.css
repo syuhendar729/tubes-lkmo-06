@@ -2,124 +2,115 @@
 @import url('../style.css');
 
 .product-detail-container {
-  width: 100%;
-  min-height: calc(100vh - 80px); /* 80px adalah tinggi navbar (approx) */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 1200px;
+  margin: 2rem auto;
   padding: 2rem;
-  background-color: #f4f4f4; /* Latar belakang abu-abu muda */
+  background-color: #ffffff;
+  border-radius: 8px;
+  min-height: 70vh;
 }
 
-.product-detail-card {
-  display: flex;
-  flex-direction: row;
-  max-width: 1000px;
-  width: 100%;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
-  overflow: hidden;
+.detail-status {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 4rem 0;
 }
 
-/* Sisi Kiri: Gambar */
-.detail-image-wrapper {
-  flex: 1;
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f9f9f9;
-}
-
-.detail-image {
-  max-width: 100%;
-  max-height: 500px;
-  object-fit: contain;
-}
-
-/* Sisi Kanan: Info */
-.detail-info-wrapper {
-  flex: 1;
-  padding: 3rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.detail-header {
-  margin-bottom: 1rem;
-}
-
-.detail-title-bg {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #000;
-  background-color: #e0e0e0;
-  padding: 0.5rem 1.5rem;
-  border-radius: 50px;
-}
-
-.detail-colors {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  padding-left: 0.5rem;
-}
-
-/* Kotak Info (Kategori, Harga, Deskripsi) */
-.detail-info-box {
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  padding: 1.5rem;
-  border: 1px solid #eee;
-}
-
-.detail-info-row {
-  display: flex;
+.product-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
   align-items: flex-start;
-  margin-bottom: 1rem;
+}
+
+.product-detail-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.product-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-detail-info {
   font-family: 'Montserrat', sans-serif;
 }
 
-.detail-info-row:last-child {
-  margin-bottom: 0;
-}
-
-.detail-label {
-  flex-basis: 120px; /* Lebar tetap untuk label */
+/* Badge Kategori (cth: "Outer" / "Kemeja") */
+.detail-jenis-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
   font-size: 1rem;
   font-weight: 600;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.detail-nama {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  /* Sembunyikan nama asli jika Anda hanya ingin pakai badge */
+  /* display: none; */ 
+}
+
+.detail-harga {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+  /* Sembunyikan harga ini jika sudah ada di grid */
+  /* display: none; */
+}
+
+/* Grid untuk Kategori, Harga, Deskripsi */
+.detail-info-grid {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Label | Value */
+  gap: 1rem;
+  font-size: 1.1rem;
+}
+
+.info-label {
+  font-weight: 600;
   color: #555;
-  background-color: #e0e0e0;
-  padding: 0.4rem 1rem;
-  border-radius: 50px;
-  text-align: center;
-  margin-right: 1rem;
+  background-color: #f5f5f5;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
 }
 
-.detail-value {
-  font-size: 1rem;
-  font-weight: 500;
+.info-value {
   color: #222;
-  background-color: #e0e0e0;
-  padding: 0.4rem 1rem;
-  border-radius: 50px;
-}
-
-/* Deskripsi bisa lebih panjang */
-.detail-value.desc {
-  border-radius: 15px;
+  background-color: #f5f5f5;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   line-height: 1.6;
-  flex: 1; /* Agar bisa memanjang */
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .product-detail-card {
-    flex-direction: column;
+  .product-detail-layout {
+    grid-template-columns: 1fr; /* Stack di HP */
+    gap: 2rem;
   }
-  .detail-info-wrapper {
-    padding: 2rem 1.5rem;
+  .product-detail-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  .detail-nama {
+    font-size: 2rem;
+  }
+  .detail-harga {
+    font-size: 1.5rem;
+  }
+  .detail-info-grid {
+    font-size: 1rem;
   }
 }
