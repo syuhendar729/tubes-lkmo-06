@@ -29,8 +29,6 @@ PORT=5000
 
 Catatan: backend ini menggunakan Google Gemini via paket `@google/generative-ai`. Pastikan Anda memiliki API key yang valid.
 
-## Menjalankan server
-
 ```bash
 npm start
 ```
@@ -44,35 +42,25 @@ Secara default server berjalan pada `PORT` dari `.env` atau `5000`.
 3. GET /api/products[?gender=man|woman] — Ambil daftar produk (opsional filter gender)
 4. GET /api/product/detail?nama=<Nama%20Produk> — Ambil detail produk berdasarkan nama
 
-## Endpoint: GET /
+## API Rekomendasi Fashion
+Endpoint : POST /api/rekomendasi-fashion
 
-Response (200):
+API Public URL: https://nuve-be.vercel.app/api/rekomendasi-fashion
 
-```json
-{ "message": "API for Nuve - Fashion recommendation website" }
-```
-
-## Endpoint: POST /api/rekomendasi-fashion
-
-Deskripsi: Meminta rekomendasi fashion berbasis input pengguna. Server meneruskan prompt ke model Gemini.
-
-Request (Content-Type: application/json) — contoh body:
+Request Body :
 
 ```json
 {
-	"umur": "25",
-	"jenis_kelamin": "Pria",
-	"status": "Mahasiswa",
-	"pekerjaan": "Magang",
-	"lokasi": "Jakarta (tropis)",
-	"aktivitas": "Kuliah dan hangout",
-	"gaya_pribadi": "Casual, minimalis",
-	"budget": "Rp 300.000 - Rp 800.000",
-	"tujuan": "Tampil rapi namun santai"
+    "umur":"28",
+    "jenis_kelamin":"Wanita",
+    "pekerjaan":"Marketing",
+    "lokasi":"Bandung",
+    "aktivitas":"Meeting dan event",
+    "budget":"Rp 500.000 - Rp 1.500.000",
 }
 ```
 
-Response (200) — contoh:
+Response Body (Success) : 
 
 ```json
 {
@@ -80,88 +68,137 @@ Response (200) — contoh:
 }
 ```
 
-Errors:
-- 500: Jika komunikasi dengan Gemini gagal. Response: `{ "error": "Gagal mendapatkan rekomendasi dari Gemini" }`
-
-Catatan: Endpoint ini memanggil `model.generateContent(prompt)` — pastikan quota/limit API Anda mencukupi.
-
-## Endpoint: GET /api/products
-
-Deskripsi: Mengembalikan data produk. Dapat difilter menggunakan query `gender`.
-
-Query params:
-- `gender` (opsional) — `man` atau `woman`
-
-Contoh-curl (semua):
-
-```bash
-curl -X GET "http://localhost:5000/api/products"
-```
-
-Contoh-curl (filter gender):
-
-```bash
-curl -X GET "http://localhost:5000/api/products?gender=man"
-```
-
-Response: JSON berisi array produk untuk gender tersebut, atau objek dengan dua properti `man` dan `woman` jika tidak ada filter.
-
-## Endpoint: GET /api/product/detail
-
-Deskripsi: Mengambil detail produk berdasarkan nama (case-insensitive).
-
-Query params (required):
-- `nama` — Nama produk (URL-encoded)
-
-Contoh-curl:
-
-```bash
-curl -G "http://localhost:5000/api/product/detail" --data-urlencode "nama=Kaos Polos Putih"
-```
-
-Response (200) — contoh:
+Response Body (Failed) :
 
 ```json
 {
-	"nama": "Kaos Polos Putih",
-	"kategori": "top",
-	"warna": "putih",
-	"harga": 120000,
-	"deskripsi": "..."
+    "error": "Gagal mendapatkan rekomendasi dari Gemini"
 }
 ```
 
-Response errors:
-- 400: `{ "error": "Query parameter \"nama\" diperlukan" }` jika `nama` tidak diberikan
-- 404: `{ "error": "Produk tidak ditemukan" }` jika tidak ada produk yang cocok
+## API Get All Products
+Endpoint : GET /api/products
 
-## Struktur data produk
+API Public URL: https://nuve-be.vercel.app/api/products
 
-File `manFashion.json` dan `womanFashion.json` berisi struktur data yang dipakai server. `getAllProductsArray()` di `main.js` menggabungkan:
-- `top`, `down`, `footwear` dari kedua file.
+Terdapat 2 gender sebagai input parameter:
+- `man`
+- `woman`
 
-Gunakan `nama` dari tiap item untuk mencari detail lewat `/api/product/detail`.
+Terdapat 3 jenis pakaian yang menjadi respon dari API:
+- `top`: Atasan
+- `down`: Bawahan
+- `footwear`: Alas kaki
 
-## Contoh alur singkat
+Request Params :
 
-1. Dapatkan daftar produk pria:
-
-```bash
-curl -X GET "http://localhost:5000/api/products?gender=man"
+```json
+# All Products
+https://nuve-be.vercel.app/api/products
+```
+```json
+# All Man Products
+https://nuve-be.vercel.app/api/products?gender=man
+```
+```json
+# All Woman Products
+https://nuve-be.vercel.app/api/products?gender=woman
 ```
 
-2. Pilih sebuah produk, ambil detailnya (misal nama: "Sneakers Hitam"):
+Response Body (Success) : 
+Contoh jika data top, down, dan footwear memiliki 1 product
+```json
 
-```bash
-curl -G "http://localhost:5000/api/product/detail" --data-urlencode "nama=Sneakers Hitam"
+{
+    "top": [
+        {
+            "nama": "Varsity Nova",
+            "jenis": "Jaket",
+            "harga": "Rp 189.000",
+            "deskripsi": "Jaket varsity dengan bahan fleece lembut dan desain klasik bergaya retro."
+        }
+        ...
+    ],
+    "down": [
+        {
+            "nama": "Chill Track",
+            "jenis": "Celana",
+            "harga": "Rp 159.000",
+            "deskripsi": "Celana jogger berbahan katun stretch yang fleksibel dan nyaman."
+        }
+        ...
+    ],
+    "footwear": [
+        {
+            "nama": "Black Edge",
+            "jenis": "Sepatu",
+            "harga": "Rp 189.000",
+            "deskripsi": "Sepatu sneakers hitam dengan sol tebal dan desain sporty minimalis."
+        }
+        ...
+    ]
+}
 ```
 
-3. Minta rekomendasi gaya berdasarkan profil user:
+Response Body (Failed) :
+*Jika reqeust tidak valid maka API akan otomatis mengembalikan default API dengan semua data `man` dan `woman`
+```json
+{
+    "man": {
+        "top": [
+            ...
+        ],
+        "down": [
+            ...
+        ],
+        "footwear": [
+            ...
+        ]
+    },
+    "woman": {
+        "top": [
+            ...
+        ],
+        "down": [
+            ...
+        ],
+        "footwear": [
+            ...
+        ]
+    }
+}
+```
 
-```bash
-curl -X POST "http://localhost:5000/api/rekomendasi-fashion" \
-	-H "Content-Type: application/json" \
-	-d '{"umur":"28","jenis_kelamin":"Wanita","status":"Karyawan","pekerjaan":"Marketing","lokasi":"Bandung","aktivitas":"Meeting dan event","gaya_pribadi":"Formal-casual","budget":"Rp 500.000 - Rp 1.500.000","tujuan":"Tampil profesional namun stylish"}'
+## API Detail Product
+Endpoint : GET /api/product/{id}
+
+API Public URL: https://nuve-be.vercel.app/api/product/{id}
+
+Request Body :
+
+```json
+# Get Detail Product by ID
+https://nuve-be.vercel.app/api/product/mantop01
+```
+
+Response Body (Success) : 
+
+```json
+{
+    "nama": "Varsity Nova",
+    "jenis": "Jaket",
+    "harga": "Rp 189.000",
+    "deskripsi": "Jaket varsity dengan bahan fleece lembut dan desain klasik bergaya retro.",
+    "id": "mantop01"
+}
+```
+
+Response Body (Failed) :
+
+```json
+{
+    "error": "Produk tidak ditemukan"
+}
 ```
 
 ## Debugging & catatan

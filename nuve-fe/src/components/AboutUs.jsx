@@ -40,7 +40,11 @@ export default function AboutUs() {
       <div
         className="aboutus-bg"
         style={{
+<<<<<<< HEAD
           backgroundImage: `url(/asset/bg/About.jpg)`,
+=======
+          backgroundImage: `url(${encodeURI('/../public/asset/AboutUsBG.jpg')})`,
+>>>>>>> 28dd92283d86f7926b55f6313f790a9aee0dd6ec
         }}
       />
 
