@@ -69,3 +69,91 @@
   margin-bottom: 1rem;
   font-weight: 500;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .gemini-recommendation {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .recommendation-text h3 {
+    font-size: 1.3rem;
+  }
+
+  .recommendation-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .product-showcase > h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-recommendations h4 {
+    font-size: 1.2rem;
+  }
+
+  .loading-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .gemini-recommendation {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .recommendation-text h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .recommendation-text p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .loading-container {
+    padding: 1rem;
+  }
+
+  .loading-container p {
+    font-size: 1rem;
+  }
+
+  .loading-spinner {
+    width: 35px;
+    height: 35px;
+    border-width: 3px;
+  }
+
+  .product-showcase {
+    margin-top: 2rem;
+  }
+
+  .product-showcase > h3 {
+    font-size: 1.2rem;
+  }
+
+  .category-recommendations h4 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .recommendation-text h3 {
+    font-size: 1rem;
+  }
+
+  .recommendation-text p {
+    font-size: 0.9rem;
+  }
+
+  .product-showcase > h3,
+  .category-recommendations h4 {
+    font-size: 1rem;
+  }
+}
