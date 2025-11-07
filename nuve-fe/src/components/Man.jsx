@@ -218,6 +218,7 @@ const Man = () => {
               <Link to="/woman" className="dropdown-item">Woman</Link>
             </div>
           </div>
+          <Link to="/contact">Contact</Link>
         </div>
       </nav>
 
