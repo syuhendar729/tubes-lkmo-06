@@ -19,18 +19,17 @@ app.get('/', (req, res) => {
     res.json({ message: 'API for Nuve - Fashion recommendation website' })
 })
 
+// API UNTUK MENDAPATKAN REKOMENDASI FASHION DARI GEMINI
 app.post('/api/rekomendasi-fashion', async (req, res) => {
     try {
         const {
             umur,
             jenis_kelamin,
-            status,
             pekerjaan,
             lokasi,
             aktivitas,
-            gaya_pribadi,
             budget,
-            tujuan,
+            jenis_pakaian,
         } = req.body
 
         const prompt = 
@@ -39,13 +38,11 @@ app.post('/api/rekomendasi-fashion', async (req, res) => {
 			Berikan rekomendasi fashion yang cocok berdasarkan data berikut:
 			- Umur: ${umur}
 			- Jenis kelamin: ${jenis_kelamin}
-			- Status: ${status}
 			- Pekerjaan: ${pekerjaan}
 			- Lokasi/iklim: ${lokasi}
 			- Aktivitas harian: ${aktivitas}
-			- Preferensi gaya pribadi: ${gaya_pribadi}
 			- Budget: ${budget}
-			- Tujuan fashion: ${tujuan}
+            - Jenis pakaian yang dicari: ${jenis_pakaian}
 
 			Berikan rekomendasi dalam format:
 			1. Gaya berpakaian utama
@@ -101,25 +98,28 @@ const getAllProductsArray = () => {
     return allProducts
 }
 
-// API UNTUK GET PRODUCT DETAIL (BERDASARKAN NAMA)
-app.get('/api/product/detail', (req, res) => {
-    const { nama } = req.query // Mengambil query ?nama=Nama%20Produk
+// API UNTUK GET PRODUCT DETAIL (BERDASARKAN ID)
+// Endpoint baru yang direkomendasikan: GET /api/product/:id
+// Contoh: GET /api/product/mantop01
+app.get('/api/product/:id', (req, res) => {
+    const { id } = req.params; // Mengambil route param /api/product/:id
 
-    if (!nama) {
-        return res.status(400).json({ error: 'Query parameter "nama" diperlukan' })
+    if (!id) {
+        return res.status(400).json({ error: 'Parameter "id" diperlukan' });
     }
 
-    const allProducts = getAllProductsArray()
-    
-    // Cari produk berdasarkan nama (tidak case-sensitive)
-    const product = allProducts.find(p => p.nama.toLowerCase() === nama.toLowerCase())
+    const allProducts = getAllProductsArray();
+
+    // Cari produk berdasarkan field `id` (case-insensitive)
+    const product = allProducts.find(p => p.id && p.id.toLowerCase() === id.toLowerCase());
 
     if (product) {
-        res.json(product)
-    } else {
-        res.status(404).json({ error: 'Produk tidak ditemukan' })
+        return res.json(product);
     }
-})
+
+    return res.status(404).json({ error: 'Produk tidak ditemukan' });
+});
+
 
 // ----------------------------------------------------
 
