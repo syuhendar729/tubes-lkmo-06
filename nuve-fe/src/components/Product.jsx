@@ -62,7 +62,7 @@ const Product = () => {
     const fetchProducts = async () => {
       try {
         // Panggilan API ini tetap sama
-        const response = await fetch('http://nuve-be.vercel.app/api/products');
+        const response = await fetch('https://nuve-be.vercel.app/api/products');
         if (!response.ok) {
           throw new Error('Gagal mengambil data produk');
         }

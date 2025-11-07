@@ -52,7 +52,7 @@ const Man = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products?gender=man');
+        const response = await fetch('https://localhost:5000/api/products?gender=man');
         const data = await response.json();
         console.log('Data fetched from API:', data);
         setProductData(data);
