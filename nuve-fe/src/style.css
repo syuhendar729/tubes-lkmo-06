@@ -149,13 +149,17 @@ body {
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 2rem;
-    text-align: left;
+    text-align: center;
     background-color: #d9d9d9;
     padding: 0.8rem 2rem;
     border-radius: 50px;
     display: inline-block;
     color: #000;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    max-width: 90%;
+    word-wrap: break-word;
+    line-height: 1.5;
+    white-space: normal;
 }
 
 /* Figure/Image Section */
@@ -509,6 +513,7 @@ body {
 
 /* MEDIA QUERIES */
 
+/* Tablet and below */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -517,29 +522,153 @@ body {
 
     .logo {
         margin-right: 0;
+        margin-bottom: 1rem;
     }
     
     .nav-links {
         margin-top: 1rem;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .nav-links a,
+    .dropdown-toggle {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* Man/Woman Page */
+    .man-title {
+        font-size: 1.5rem;
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        max-width: 95%;
+        margin: 0 auto 1.5rem auto;
+        display: block;
+        line-height: 1.3;
+        word-spacing: 3px;
+    }
+
+    .man-figure-section {
+        min-height: 280px;
+        margin: 1rem;
+        padding: 1rem 0;
+    }
+
+    .clothing-display {
+        transform: scale(0.8);
+    }
+
+    .arrow-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+        border-width: 1.5px;
+    }
+
+    .arrow-btn.top-left {
+        top: 80px;
+        left: 50px;
+    }
+
+    .arrow-btn.top-right {
+        top: 80px;
+        right: 50px;
+    }
+
+    .arrow-btn.middle-left {
+        top: 200px;
+        left: 50px;
+    }
+
+    .arrow-btn.middle-right {
+        top: 200px;
+        right: 50px;
+    }
+
+    .arrow-btn.bottom-left {
+        bottom: 80px;
+        left: 50px;
+    }
+
+    .arrow-btn.bottom-right {
+        bottom: 80px;
+        right: 50px;
+    }
+
+    .man-form {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .form-row {
+        flex-direction: column;
         gap: 1rem;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    .form-btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    /* Recommendation Section */
+    .recommendation-section {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .recommendation-title {
+        font-size: 1.5rem;
+    }
+
+    .gemini-recommendation {
+        padding: 1.5rem;
+    }
+
+    .recommendation-text h3 {
+        font-size: 1.2rem;
+    }
+
+    .recommendation-text p {
+        font-size: 1rem;
+    }
+
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        width: 100%;
     }
 }
 
+/* Mobile Landscape and below */
 @media (max-width: 900px) {
     .man-main {
         max-width: 100vw;
     }
+    
     .form-row {
         flex-direction: column;
         gap: 0.5rem;
     }
+    
     .man-figure-section {
         min-height: 260px;
     }
 }
 
+/* Small Mobile */
 @media (max-width: 600px) {
     .aboutus-content-box {
         width: 90vw; 
@@ -547,11 +676,261 @@ body {
         margin-left: auto; 
         margin-right: auto;
     }
+    
     .aboutus-title {
         font-size: 2rem;
         margin-left: 0.5rem;
     }
+    
     .aboutus-section {
         padding: 1.2rem 0.2rem 2rem 0.2rem;
+    }
+
+    /* Man/Woman Page Mobile */
+    .man-title {
+        font-size: 1.2rem;
+        padding: 1rem 1rem;
+        text-align: center;
+        max-width: 95%;
+        margin: 0.5rem auto 1rem auto;
+        display: block;
+        line-height: 1.4;
+        word-spacing: 2px;
+        letter-spacing: 0.3px;
+    }
+
+    .man-figure-section {
+        min-height: 240px;
+        margin: 0.5rem;
+        padding: 0.8rem 0;
+    }
+
+    .clothing-display {
+        transform: scale(0.7);
+    }
+
+    .arrow-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+        border-width: 1.5px;
+    }
+
+    .arrow-btn.top-left { 
+        top: 60px; 
+        left: 20px; 
+    }
+    
+    .arrow-btn.top-right { 
+        top: 60px; 
+        right: 20px; 
+    }
+    
+    .arrow-btn.middle-left { 
+        top: 50%; 
+        left: 20px;
+        transform: translateY(-50%);
+    }
+    
+    .arrow-btn.middle-right { 
+        top: 50%; 
+        right: 20px;
+        transform: translateY(-50%);
+    }
+    
+    .arrow-btn.bottom-left { 
+        bottom: 60px; 
+        left: 20px; 
+    }
+    
+    .arrow-btn.bottom-right { 
+        bottom: 60px; 
+        right: 20px; 
+    }
+
+    .man-form {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .form-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        min-width: 80px;
+    }
+
+    .checkmark {
+        width: 14px;
+        height: 14px;
+        font-size: 10px;
+    }
+
+    .submit-btn {
+        padding: 0.9rem;
+        font-size: 1rem;
+    }
+
+    /* Recommendation Section Mobile */
+    .recommendation-section {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .recommendation-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .recommendation-subtitle,
+    .recommendation-info {
+        font-size: 0.95rem;
+    }
+
+    .gemini-recommendation {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    .recommendation-text h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .recommendation-text p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .loading-container p {
+        font-size: 1rem;
+    }
+
+    .loading-spinner {
+        width: 35px;
+        height: 35px;
+    }
+
+    .product-showcase h3,
+    .category-recommendations h4 {
+        font-size: 1.1rem;
+    }
+
+    .product-card {
+        padding: 1rem;
+    }
+
+    .product-name {
+        font-size: 1rem;
+    }
+
+    .product-type,
+    .product-price {
+        font-size: 0.9rem;
+    }
+
+    .product-desc {
+        font-size: 0.85rem;
+    }
+
+    .recommendation-grid {
+        gap: 1rem;
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 400px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .nav-links a,
+    .dropdown-toggle {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .man-title {
+        font-size: 1rem;
+        padding: 0.8rem 0.8rem;
+        line-height: 1.4;
+        word-spacing: 1px;
+        letter-spacing: 0.2px;
+        max-width: 98%;
+    }
+
+    .clothing-display {
+        transform: scale(0.6);
+    }
+
+    .man-figure-section {
+        min-height: 200px;
+        padding: 0.5rem 0;
+    }
+
+    .arrow-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 0.9rem;
+        border-width: 1px;
+    }
+
+    .arrow-btn.top-left { 
+        top: 40px; 
+        left: 10px; 
+    }
+    
+    .arrow-btn.top-right { 
+        top: 40px; 
+        right: 10px; 
+    }
+    
+    .arrow-btn.middle-left { 
+        top: 50%; 
+        left: 10px;
+        transform: translateY(-50%);
+    }
+    
+    .arrow-btn.middle-right { 
+        top: 50%; 
+        right: 10px;
+        transform: translateY(-50%);
+    }
+    
+    .arrow-btn.bottom-left { 
+        bottom: 40px; 
+        left: 10px; 
+    }
+    
+    .arrow-btn.bottom-right { 
+        bottom: 40px; 
+        right: 10px; 
+    }
+
+    .form-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+        min-width: 70px;
+    }
+
+    .recommendation-title {
+        font-size: 1.1rem;
+    }
+
+    .recommendation-text h3 {
+        font-size: 1rem;
+    }
+
+    .recommendation-text p,
+    .product-desc {
+        font-size: 0.85rem;
     }
 }

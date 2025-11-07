@@ -220,7 +220,9 @@ const Man = () => {
       </nav>
 
       <main className="man-main">
-        <h1 className="man-title">MAN RECOMMENDATION OUTFIT</h1>
+        <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+          <h1 className="man-title">MAN RECOMMENDATION OUTFIT</h1>
+        </div>
         
         <div className="man-figure-section">
           <div className="clothing-display">
@@ -368,7 +370,7 @@ const Man = () => {
               className={`form-btn ${selectedCategories.atasan ? 'selected' : ''}`}
               onClick={() => toggleCategory('atasan')}
             >
-              Atasan
+              TOP
               {selectedCategories.atasan && <span className="checkmark">✓</span>}
             </button>
             <button 
@@ -376,7 +378,7 @@ const Man = () => {
               className={`form-btn ${selectedCategories.bawahan ? 'selected' : ''}`}
               onClick={() => toggleCategory('bawahan')}
             >
-              Bawahan
+              BOTTOM
               {selectedCategories.bawahan && <span className="checkmark">✓</span>}
             </button>
             <button 
@@ -384,7 +386,7 @@ const Man = () => {
               className={`form-btn ${selectedCategories.footwear ? 'selected' : ''}`}
               onClick={() => toggleCategory('footwear')}
             >
-              Footwear
+              FOOTWEAR
               {selectedCategories.footwear && <span className="checkmark">✓</span>}
             </button>
           </div>
