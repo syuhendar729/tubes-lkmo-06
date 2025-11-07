@@ -45,6 +45,8 @@ const Man = () => {
   });
 
   const [showRecommendations, setShowRecommendations] = useState(false);
+  const [geminiRecommendation, setGeminiRecommendation] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // Fetch product data from API
   useEffect(() => {
@@ -99,11 +101,10 @@ const Man = () => {
     }));
   };
 
-  const generateAllRecommendations = () => {
+  const generateAllRecommendations = async () => {
     console.log('=== Generate Recommendations ===');
-    console.log('Product Data:', productData);
+    console.log('Form Data:', formData);
     console.log('Selected Categories:', selectedCategories);
-    console.log('Budget:', formData.budget);
     
     // Check if form is filled
     const isFormFilled = formData.umur && formData.lokasi && formData.aktivitas && 
@@ -120,58 +121,55 @@ const Man = () => {
       return;
     }
 
-    const budgetValue = parseInt(formData.budget.replace(/\D/g, ''));
-    console.log('Budget Value (parsed):', budgetValue);
-    
-    const newRecommendations = {
-      atasan: [],
-      bawahan: [],
-      footwear: []
-    };
-
-    // Generate recommendations for each selected category
-    if (selectedCategories.atasan) {
-      const products = productData.top || [];
-      console.log('Atasan products:', products);
-      const filteredProducts = products.filter(product => {
-        const productPrice = parseInt(product.harga.replace(/\D/g, ''));
-        console.log(`Product: ${product.nama}, Price: ${productPrice}, Budget: ${budgetValue}`);
-        return productPrice <= budgetValue;
-      });
-      console.log('Atasan filtered:', filteredProducts);
-      // Always show products, if filtered is empty, show all
-      newRecommendations.atasan = filteredProducts.length > 0 ? filteredProducts : products;
-    }
-
-    if (selectedCategories.bawahan) {
-      const products = productData.down || [];
-      console.log('Bawahan products:', products);
-      const filteredProducts = products.filter(product => {
-        const productPrice = parseInt(product.harga.replace(/\D/g, ''));
-        console.log(`Product: ${product.nama}, Price: ${productPrice}, Budget: ${budgetValue}`);
-        return productPrice <= budgetValue;
-      });
-      console.log('Bawahan filtered:', filteredProducts);
-      // Always show products, if filtered is empty, show all
-      newRecommendations.bawahan = filteredProducts.length > 0 ? filteredProducts : products;
-    }
-
-    if (selectedCategories.footwear) {
-      const products = productData.footwear || [];
-      console.log('Footwear products:', products);
-      const filteredProducts = products.filter(product => {
-        const productPrice = parseInt(product.harga.replace(/\D/g, ''));
-        console.log(`Product: ${product.nama}, Price: ${productPrice}, Budget: ${budgetValue}`);
-        return productPrice <= budgetValue;
-      });
-      console.log('Footwear filtered:', filteredProducts);
-      // Always show products, if filtered is empty, show all
-      newRecommendations.footwear = filteredProducts.length > 0 ? filteredProducts : products;
-    }
-
-    console.log('Final Recommendations:', newRecommendations);
-    setRecommendations(newRecommendations);
+    setIsLoading(true);
     setShowRecommendations(true);
+
+    try {
+      // Prepare categories for API - build the style preference based on selected categories
+      const selectedCategoriesText = [];
+      if (selectedCategories.atasan) selectedCategoriesText.push('Atasan (baju, jaket, kemeja, hoodie)');
+      if (selectedCategories.bawahan) selectedCategoriesText.push('Bawahan (celana panjang, jeans, jogger)');
+      if (selectedCategories.footwear) selectedCategoriesText.push('Footwear (sepatu sneakers, boots, running shoes)');
+
+      // Build comprehensive style preference
+      const gayaPribadi = `Rekomendasi untuk kategori: ${selectedCategoriesText.join(', ')}. Berikan saran detail untuk setiap kategori yang diminta.`;
+
+      const requestBody = {
+        umur: formData.umur,
+        jenis_kelamin: formData.gender,
+        status: 'Single', // Default value
+        pekerjaan: formData.pekerjaan,
+        lokasi: formData.lokasi,
+        aktivitas: formData.aktivitas,
+        gaya_pribadi: gayaPribadi,
+        budget: formData.budget,
+        tujuan: `Rekomendasi outfit untuk ${selectedCategories.atasan ? 'Atasan' : ''}${selectedCategories.atasan && selectedCategories.bawahan ? ', ' : ''}${selectedCategories.bawahan ? 'Bawahan' : ''}${(selectedCategories.atasan || selectedCategories.bawahan) && selectedCategories.footwear ? ', ' : ''}${selectedCategories.footwear ? 'Footwear' : ''}`
+      };
+
+      console.log('Sending request to Gemini API:', requestBody);
+
+      const response = await fetch('https://nuve-be.vercel.app/api/rekomendasi-fashion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      const data = await response.json();
+      console.log('Gemini API Response:', data);
+
+      if (data.rekomendasi) {
+        setGeminiRecommendation(data.rekomendasi);
+      } else {
+        setGeminiRecommendation('Maaf, tidak dapat menghasilkan rekomendasi saat ini.');
+      }
+    } catch (error) {
+      console.error('Error fetching recommendation:', error);
+      setGeminiRecommendation('Terjadi kesalahan saat mengambil rekomendasi. Silakan coba lagi.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -407,29 +405,29 @@ const Man = () => {
               {selectedCategories.bawahan && " Bawahan"}{selectedCategories.bawahan && selectedCategories.footwear && ","} 
               {selectedCategories.footwear && " Footwear"}
             </p>
-            <p className="recommendation-info">
-              Dari situ produk yang tepat untuk kamu pilih adalah:
-            </p>
 
-            {/* Debug Info */}
-            <div style={{display: 'none'}}>
-              Atasan selected: {selectedCategories.atasan ? 'Yes' : 'No'}, 
-              Length: {recommendations.atasan?.length || 0}
-              <br/>
-              Bawahan selected: {selectedCategories.bawahan ? 'Yes' : 'No'}, 
-              Length: {recommendations.bawahan?.length || 0}
-              <br/>
-              Footwear selected: {selectedCategories.footwear ? 'Yes' : 'No'}, 
-              Length: {recommendations.footwear?.length || 0}
+            <div className="gemini-recommendation">
+              {isLoading ? (
+                <div className="loading-container">
+                  <p>Sedang menghasilkan rekomendasi fashion untuk Anda...</p>
+                  <div className="loading-spinner"></div>
+                </div>
+              ) : (
+                <div className="recommendation-text">
+                  <h3>Saran Fashion dari AI:</h3>
+                  <p>{geminiRecommendation}</p>
+                </div>
+              )}
             </div>
 
-            <div className="recommendation-grid">
-              {selectedCategories.atasan && (
-                <div className="category-recommendations">
-                  <h3>Atasan</h3>
-                  {recommendations.atasan && recommendations.atasan.length > 0 ? (
+            <div className="product-showcase">
+              <h3>Produk Pilihan Kami:</h3>
+              <div className="recommendation-grid">
+                {selectedCategories.atasan && productData.top && productData.top.length > 0 && (
+                  <div className="category-recommendations">
+                    <h4>Atasan</h4>
                     <div className="product-list">
-                      {recommendations.atasan.map((product, index) => (
+                      {productData.top.slice(0, 3).map((product, index) => (
                         <div key={index} className="product-card">
                           <p className="product-name">{product.nama}</p>
                           <p className="product-type">{product.jenis}</p>
@@ -438,18 +436,14 @@ const Man = () => {
                         </div>
                       ))}
                     </div>
-                  ) : (
-                    <p>Memuat produk... (Data: {JSON.stringify(productData.top?.length || 0)} produk tersedia)</p>
-                  )}
-                </div>
-              )}
+                  </div>
+                )}
 
-              {selectedCategories.bawahan && (
-                <div className="category-recommendations">
-                  <h3>Bawahan</h3>
-                  {recommendations.bawahan && recommendations.bawahan.length > 0 ? (
+                {selectedCategories.bawahan && productData.down && productData.down.length > 0 && (
+                  <div className="category-recommendations">
+                    <h4>Bawahan</h4>
                     <div className="product-list">
-                      {recommendations.bawahan.map((product, index) => (
+                      {productData.down.slice(0, 3).map((product, index) => (
                         <div key={index} className="product-card">
                           <p className="product-name">{product.nama}</p>
                           <p className="product-type">{product.jenis}</p>
@@ -458,18 +452,14 @@ const Man = () => {
                         </div>
                       ))}
                     </div>
-                  ) : (
-                    <p>Memuat produk... (Data: {JSON.stringify(productData.down?.length || 0)} produk tersedia)</p>
-                  )}
-                </div>
-              )}
+                  </div>
+                )}
 
-              {selectedCategories.footwear && (
-                <div className="category-recommendations">
-                  <h3>Footwear</h3>
-                  {recommendations.footwear && recommendations.footwear.length > 0 ? (
+                {selectedCategories.footwear && productData.footwear && productData.footwear.length > 0 && (
+                  <div className="category-recommendations">
+                    <h4>Footwear</h4>
                     <div className="product-list">
-                      {recommendations.footwear.map((product, index) => (
+                      {productData.footwear.slice(0, 3).map((product, index) => (
                         <div key={index} className="product-card">
                           <p className="product-name">{product.nama}</p>
                           <p className="product-type">{product.jenis}</p>
@@ -478,11 +468,9 @@ const Man = () => {
                         </div>
                       ))}
                     </div>
-                  ) : (
-                    <p>Memuat produk... (Data: {JSON.stringify(productData.footwear?.length || 0)} produk tersedia)</p>
-                  )}
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

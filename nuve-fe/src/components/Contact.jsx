@@ -19,9 +19,9 @@ export default function Contact() {
   const mailtoHref = `mailto:${'rizky.123140112@student.itera.ac.id'}?subject=${emailSubject}`;
 
   const instaHandle = 'nuve.official';
-  const instaHref = `https://instagram.com/awi.prasetyo_`;
-
+  const instaHref = `https://instagram.com/callmeoda`;
   
+
   const bgPath = encodeURI('/asset/contactbg.jpg'); 
 
   return (
@@ -84,7 +84,7 @@ export default function Contact() {
               aria-label={`Chat on WhatsApp ${phoneDisplay}`}
             >
               <div className="contact-icon">
-                <img src="/asset/waaa.png" alt="WhatsApp" />
+                <img src="/asset/icon/waaa.png" alt="WhatsApp" />
               </div>
               <div className="card-text">
                 <div className="card-title">WhatsApp</div>
@@ -92,13 +92,15 @@ export default function Contact() {
               </div>
             </a>
 
+
             <a
               className="contact-card"
               href={mailtoHref}
               aria-label={`Send email to ${emailAddress}`}
             >
               <div className="contact-icon">
-                <img src="/asset/jimel.png" alt="Email" />
+
+                <img src="/asset/icon/jimel.png" alt="Email" />
               </div>
               <div className="card-text">
                 <div className="card-title">Email</div>
@@ -114,7 +116,10 @@ export default function Contact() {
               aria-label={`Open Instagram ${instaHandle}`}
             >
               <div className="contact-icon">
-                <img src="/asset/ige.png" alt="Instagram" />
+
+
+                <img src="/asset/icon/ige.png" alt="Instagram" />
+
               </div>
               <div className="card-text">
                 <div className="card-title">Instagram</div>
