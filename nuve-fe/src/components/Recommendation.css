@@ -2,3 +2,70 @@
 @import url('../style.css');
 
 /* Additional styles specific to React components if needed */
+
+/* Gemini Recommendation Styles */
+.gemini-recommendation {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-text h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.recommendation-text p {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-container p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.product-showcase {
+  margin-top: 3rem;
+}
+
+.product-showcase > h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.category-recommendations h4 {
+  color: #444;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
