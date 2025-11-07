@@ -12,27 +12,17 @@ export default function Contact() {
   // kontak (ubah sesuai data asli)
   const phoneDisplay = '+62 812 3456 7890';
   const waText = encodeURIComponent('Halo Nuve, saya ingin menanyakan tentang produk dan rekomendasi.');
-<<<<<<< HEAD
-  const waHref = `https://wa.me/${+6285158222064}?text=${waText}`;
-=======
   const waHref = `https://wa.me/${+6289508638032}?text=${waText}`;
->>>>>>> 28dd92283d86f7926b55f6313f790a9aee0dd6ec
 
   const emailAddress = 'nuve.wear@gmail.com';
   const emailSubject = encodeURIComponent('Inquiry from Website — NUVE');
   const mailtoHref = `mailto:${'rizky.123140112@student.itera.ac.id'}?subject=${emailSubject}`;
 
   const instaHandle = 'nuve.official';
-<<<<<<< HEAD
-  const instaHref = `https://instagram.com/rizky.patriawan`;
-
-
-=======
-  const instaHref = `https://instagram.com/awi.prasetyo_`;
-
+  const instaHref = `https://instagram.com/callmeoda`;
   
-  const bgPath = encodeURI('/../public/asset/contactbg.jpg'); 
->>>>>>> 28dd92283d86f7926b55f6313f790a9aee0dd6ec
+
+  const bgPath = encodeURI('/asset/contactbg.jpg'); 
 
   return (
     <div className="contact-page">
@@ -65,11 +55,7 @@ export default function Contact() {
       <div
         className="contact-bg"
         style={{
-<<<<<<< HEAD
-          backgroundImage: `url(/asset/bg/contactbg.jpg)`
-=======
           backgroundImage: `url(${bgPath})`
->>>>>>> 28dd92283d86f7926b55f6313f790a9aee0dd6ec
         }}
       />
 
@@ -98,11 +84,7 @@ export default function Contact() {
               aria-label={`Chat on WhatsApp ${phoneDisplay}`}
             >
               <div className="contact-icon">
-<<<<<<< HEAD
                 <img src="/asset/icon/waaa.png" alt="WhatsApp" />
-=======
-                <img src="/../public/asset/waaa.png" alt="WhatsApp" />
->>>>>>> 28dd92283d86f7926b55f6313f790a9aee0dd6ec
               </div>
               <div className="card-text">
                 <div className="card-title">WhatsApp</div>
@@ -110,17 +92,15 @@ export default function Contact() {
               </div>
             </a>
 
+
             <a
               className="contact-card"
               href={mailtoHref}
               aria-label={`Send email to ${emailAddress}`}
             >
               <div className="contact-icon">
-<<<<<<< HEAD
+
                 <img src="/asset/icon/jimel.png" alt="Email" />
-=======
-                <img src="/../public/asset/jimel.png" alt="Email" />
->>>>>>> 28dd92283d86f7926b55f6313f790a9aee0dd6ec
               </div>
               <div className="card-text">
                 <div className="card-title">Email</div>
@@ -136,11 +116,10 @@ export default function Contact() {
               aria-label={`Open Instagram ${instaHandle}`}
             >
               <div className="contact-icon">
-<<<<<<< HEAD
+
+
                 <img src="/asset/icon/ige.png" alt="Instagram" />
-=======
-                <img src="/../public/asset/ige.png" alt="Instagram" />
->>>>>>> 28dd92283d86f7926b55f6313f790a9aee0dd6ec
+
               </div>
               <div className="card-text">
                 <div className="card-title">Instagram</div>
