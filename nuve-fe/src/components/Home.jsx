@@ -60,7 +60,7 @@ const Home = () => {
           {/* RIGHT — IMAGE */}
           <div className="hero-image">
             <img
-              src={encodeURI('/../public/asset/gambar home.svg')}
+              src={encodeURI('/asset/gambarhome.svg')}
               alt="Fashion models"
               className="image-placeholder-img"
             />

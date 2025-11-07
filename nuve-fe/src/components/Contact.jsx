@@ -22,7 +22,7 @@ export default function Contact() {
   const instaHref = `https://instagram.com/awi.prasetyo_`;
 
   
-  const bgPath = encodeURI('/../public/asset/contactbg.jpg'); 
+  const bgPath = encodeURI('/asset/contactbg.jpg'); 
 
   return (
     <div className="contact-page">
@@ -84,7 +84,7 @@ export default function Contact() {
               aria-label={`Chat on WhatsApp ${phoneDisplay}`}
             >
               <div className="contact-icon">
-                <img src="/../public/asset/waaa.png" alt="WhatsApp" />
+                <img src="/asset/waaa.png" alt="WhatsApp" />
               </div>
               <div className="card-text">
                 <div className="card-title">WhatsApp</div>
@@ -98,7 +98,7 @@ export default function Contact() {
               aria-label={`Send email to ${emailAddress}`}
             >
               <div className="contact-icon">
-                <img src="/../public/asset/jimel.png" alt="Email" />
+                <img src="/asset/jimel.png" alt="Email" />
               </div>
               <div className="card-text">
                 <div className="card-title">Email</div>
@@ -114,7 +114,7 @@ export default function Contact() {
               aria-label={`Open Instagram ${instaHandle}`}
             >
               <div className="contact-icon">
-                <img src="/../public/asset/ige.png" alt="Instagram" />
+                <img src="/asset/ige.png" alt="Instagram" />
               </div>
               <div className="card-text">
                 <div className="card-title">Instagram</div>
