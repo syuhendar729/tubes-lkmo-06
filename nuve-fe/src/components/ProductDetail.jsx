@@ -38,7 +38,7 @@ const ProductDetail = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const apiURL = `http://nuve-be.vercel.app/api/product/${id}`;
+        const apiURL = `https://nuve-be.vercel.app/api/product/${id}`;
         const response = await fetch(apiURL);
         
         if (!response.ok) {

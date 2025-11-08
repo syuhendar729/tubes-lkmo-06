@@ -1,0 +1,184 @@
+/* File: nuve-fe/src/components/Admin.css */
+@import url('../style.css'); /* Mewarisi style utama */
+
+/* Halaman Login Palsu */
+.admin-login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #e8e8e8;
+}
+
+.admin-login-form {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.admin-login-form h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.admin-login-form p {
+  margin-bottom: 1.5rem;
+}
+
+.admin-login-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-login-form button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-login-form button:hover {
+  background: #333;
+}
+
+.error-message {
+  color: #a65858;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+
+/* Halaman Dashboard & Form */
+.admin-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+}
+
+.btn-create {
+  background-color: #000;
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-create:hover {
+  background-color: #333;
+}
+
+/* Tabel Admin */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #e0e0e0;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: #f9f9f9;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-edit, .btn-delete {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.btn-edit {
+  background-color: #f0f0f0;
+  color: #333;
+}
+.btn-edit:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-delete {
+  background-color: #a65858;
+  color: #fff;
+}
+.btn-delete:hover {
+  background-color: #8c4a4a;
+}
+
+
+/* Form Admin */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.form-group textarea {
+  min-height: 120px;
+}
+
+.form-group input[type="file"] {
+  padding: 0.5rem;
+  border: 1px dashed #ccc;
+}
