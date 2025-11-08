@@ -98,9 +98,9 @@ const AdminDashboard = () => {
             <td>{product.jenis}</td>
             <td>{product.harga}</td>
             <td className="admin-actions">
-              <Link to={`/admin/edit/${product.id}`} className="btn-edit">
+              {/* <Link to={`/admin/edit/${product.id}`} className="btn-edit">
                 Edit
-              </Link>
+              </Link> */}
               <button 
                 onClick={() => handleDelete(product.id, gender)} 
                 className="btn-delete"

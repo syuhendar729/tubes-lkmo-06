@@ -38,7 +38,7 @@ function App() {
         <Route path="/admin" element={<AdminAuth />}>
           <Route index element={<AdminDashboard />} />
           <Route path="new" element={<ProductForm />} />
-          <Route path="edit/:id" element={<ProductForm />} />
+          {/* <Route path="edit/:id" element={<ProductForm />} /> */}
         </Route>
 
       </Routes>
