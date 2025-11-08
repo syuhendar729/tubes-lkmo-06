@@ -115,7 +115,8 @@ Contoh jika data top, down, dan footwear memiliki 1 product
             "nama": "Varsity Nova",
             "jenis": "Jaket",
             "harga": "Rp 189.000",
-            "deskripsi": "Jaket varsity dengan bahan fleece lembut dan desain klasik bergaya retro."
+            "deskripsi": "Jaket varsity dengan bahan fleece lembut dan desain klasik bergaya retro.",
+            "id": "mantop01"
         }
         ...
     ],
@@ -124,7 +125,8 @@ Contoh jika data top, down, dan footwear memiliki 1 product
             "nama": "Chill Track",
             "jenis": "Celana",
             "harga": "Rp 159.000",
-            "deskripsi": "Celana jogger berbahan katun stretch yang fleksibel dan nyaman."
+            "deskripsi": "Celana jogger berbahan katun stretch yang fleksibel dan nyaman.",
+            "id": "mandown01"
         }
         ...
     ],
@@ -133,7 +135,8 @@ Contoh jika data top, down, dan footwear memiliki 1 product
             "nama": "Black Edge",
             "jenis": "Sepatu",
             "harga": "Rp 189.000",
-            "deskripsi": "Sepatu sneakers hitam dengan sol tebal dan desain sporty minimalis."
+            "deskripsi": "Sepatu sneakers hitam dengan sol tebal dan desain sporty minimalis.",
+            "id": "manfootwear01"
         }
         ...
     ]
