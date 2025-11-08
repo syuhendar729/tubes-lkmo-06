@@ -19,37 +19,36 @@
   backdrop-filter: blur(2px);
 }
 
-/* background image - slightly scaled down so full model more likely visible */
+
 .aboutus-bg {
   position: absolute;
-  inset: 0;
-  /* make the image a bit smaller than full width so it fits more fully */
-  background-size: 90% auto;        /* <-- key: scale image to 90% width */
-  background-position: center top;  /* focus near top so models show */
+  inset: 0; 
+  background-size: 90% auto;        
+  background-position: center top;  
   background-repeat: no-repeat;
   z-index: 1;
   filter: brightness(0.98) saturate(1.02);
   transition: transform 0.4s ease;
 }
 
-/* Overlay content above bg */
+
 .aboutus-overlay {
   position: relative;
   z-index: 5;
   width: 100%;
   min-height: calc(100vh - 80px);
-  box-sizing: border-box;
+  
 }
 
 /* TITLE placed at left-top, below navbar */
 .aboutus-title {
   position: absolute;
-  top: 35px; /* adjust gap from top (accounting navbar height). Tweak if your navbar height differs */
-  left: 50px;
+  top: 55px; /* adjust gap from top (accounting navbar height). Tweak if your navbar height differs */
+  left: 100px;
   margin: 0;
   font-family: 'Montserrat', Arial, sans-serif;
   font-weight: 800;
-  font-size: 34px;
+  font-size: 25px;
   color: #111;
   letter-spacing: 2px;
   text-shadow: 0 3px 10px rgba(0,0,0,0.12);
@@ -65,7 +64,7 @@
   bottom: 0px; /* distance from bottom - tweak as needed */
   width: min(980px, 86%);
   background: rgba(255,255,255,0.16);
-  border-radius: 18px;
+  border-radius: 0px;
   padding: 28px 36px;
   box-shadow: 0 22px 46px rgba(0,0,0,0.25);
   backdrop-filter: blur(30px);
@@ -83,33 +82,73 @@
 }
 
 /* RESPONSIVE tweaks */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .aboutus-bg { background-size: 95% auto; background-position: center top; }
   .aboutus-title {
-    top: 72px;
-    left: 24px;
-    font-size: 28px;
+    top: 70px;
+    left: 20px;
+    font-size: 24px;
   }
   .aboutus-description {
-    width: 92%;
-    font-size: 16px;
-    padding: 20px;
-    bottom: 40px;
+    width: 90%;
+    font-size: 15px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    bottom: 20px;
   }
 }
 
-@media (max-width: 768px) {
-  .aboutus-bg { background-size: cover; background-position: center; } /* on small screens make it cover so no blank areas */
-  .aboutus-title {
-    top: 64px;
-    left: 18px;
-    font-size: 22px;
+/* MOBILE FIXES — paste at end of AboutUs.css */
+@media (max-width: 480px) {
+  /* pastikan body/page tidak menghasilkan horizontal scroll akibat bg absolut */
+  .aboutus-page,
+  .aboutus-overlay {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* dorong ke bawah */
+    min-height: 100vh;
+    padding-bottom: 20px;
+    overflow-x: hidden;
   }
+
+  /* Judul: jangan pakai absolute di small mobile, jadikan centered */
+  .aboutus-title {
+    position: relative;
+    text-align: center !important;
+    top: auto;
+    left: auto;
+    transform: none ;
+    margin: 24px auto 12px auto;
+    font-size: 22px; 
+    width: 100%;
+    letter-spacing: 1px;
+    z-index: 6;
+  }
+
+ 
   .aboutus-description {
-    width: 92%;
-    font-size: 15px;
-    padding: 16px;
+    position: relative ;
+    left: auto ;
+    bottom: auto ;
+    transform: none ;
+    width: 90%;
+    margin: 0 auto 40px auto; 
+    padding: 18px 18px;
+    font-size: 14px;
+    line-height: 1.55;
     border-radius: 12px;
-    bottom: 28px;
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+    text-align: center; 
+    z-index: 6;
+  }
+
+  /* pastikan background image tetap cover dan fokus center */
+  .aboutus-bg {
+    background-size: cover;
+    background-position: center top;
+    transform: none ;
   }
 }

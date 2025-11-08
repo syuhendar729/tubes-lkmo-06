@@ -12,7 +12,7 @@ export default function Contact() {
   // kontak (ubah sesuai data asli)
   const phoneDisplay = '+62 812 3456 7890';
   const waText = encodeURIComponent('Halo Nuve, saya ingin menanyakan tentang produk dan rekomendasi.');
-  const waHref = `https://wa.me/${+6289508638032}?text=${waText}`;
+  const waHref = `https://wa.me/${+6285158222064}?text=${waText}`;
 
   const emailAddress = 'nuve.wear@gmail.com';
   const emailSubject = encodeURIComponent('Inquiry from Website — NUVE');
@@ -22,7 +22,7 @@ export default function Contact() {
   const instaHref = `https://instagram.com/callmeoda`;
   
 
-  const bgPath = encodeURI('/asset/contactbg.jpg'); 
+  const bgPath = encodeURI('/asset/bg/contactbg.jpg'); 
 
   return (
     <div className="contact-page">

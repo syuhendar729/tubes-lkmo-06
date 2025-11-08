@@ -192,10 +192,75 @@
   .contact-icon img { width: 22px; height: 22px; }
 }
 
-/* small tweaks for very small phones */
-@media (max-width: 420px) {
-  .contact-title { font-size: 26px; }
-  .card-title { font-size: 14px; }
-  .card-sub { font-size: 13px; }
-  .contact-actions-wrapper { padding-bottom: 36px; }
+@media (max-width: 480px) {
+  .contact-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* dorong semua ke bawah */
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 20px; /* jarak kecil dari tepi bawah layar */
+    box-sizing: border-box;
+  }
+
+  /* Deskripsi turun & mengecil */
+  .contact-desc {
+    width: 85%;
+    max-width: 720px;
+    margin: 0 auto -30px auto; /* jarak antar desc dan kartu kontak */
+    padding: 10px 14px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    text-align: center;
+  }
+
+  /* Wrapper kartu kontak (WA, Email, IG) di paling bawah */
+  .contact-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 0; /* hilangkan jarak bawah agar mepet */
+    padding-bottom: 0;
+  }
+
+  /* Kartu kontak kecil & rapat */
+  .contact-card {
+    width: 82%;
+    max-width: 340px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Icon & teks diperkecil */
+  .contact-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .contact-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .card-title {
+    font-size: 13px;
+    margin-bottom: 1px;
+  }
+  .card-sub {
+    font-size: 12px;
+  }
+
+  /* Background tetap proporsional */
+  .contact-bg {
+    background-position: center top;
+    background-size: cover;
+  }
 }
