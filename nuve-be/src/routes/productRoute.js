@@ -5,9 +5,12 @@ import {
 	createProduct,
 	updateProduct,
 	deleteProduct,
+    checkConnection
 } from '../controllers/productController.js'
 
 const router = express.Router()
+
+router.get('/check', checkConnection)
 
 router.get('/products', listProducts)
 router.get('/product/:id', getProductById)
