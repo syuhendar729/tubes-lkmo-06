@@ -101,6 +101,7 @@ const Product = () => {
             </div>
           </div>
           <Link to="/contact">Contact</Link>
+          <Link to="/admin">Login</Link>
         </div>
       </nav>
       
