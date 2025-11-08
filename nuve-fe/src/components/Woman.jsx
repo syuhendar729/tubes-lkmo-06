@@ -52,7 +52,7 @@ const Woman = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://localhost:5000/api/products?gender=woman');
+        const response = await fetch('https://nuve-be.vercel.app/api/products');
         const data = await response.json();
         console.log('Data fetched from API:', data);
         setProductData(data);
