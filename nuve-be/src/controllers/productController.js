@@ -4,16 +4,24 @@ import admin from 'firebase-admin'
 
 const COLL = 'products'
 
-const getAllProductsArray = () => {
-  return [
-    ...manFashion.top,
-    ...manFashion.down,
-    ...manFashion.footwear,
-    ...womanFashion.top,
-    ...womanFashion.down,
-    ...womanFashion.footwear,
-  ]
+export function checkConnection(req, res) {
+  if (admin.apps && admin.apps.length > 0) {
+    return res.json({ ok: true, message: 'Firestore is initialized' })
+  } else {
+    return res.status(500).json({ ok: false, error: 'Firestore not initialized' })
+  }
 }
+
+// const getAllProductsArray = () => {
+//   return [
+//     ...manFashion.top,
+//     ...manFashion.down,
+//     ...manFashion.footwear,
+//     ...womanFashion.top,
+//     ...womanFashion.down,
+//     ...womanFashion.footwear,
+//   ]
+// }
 
 function formatPriceTextFromNumber(n) {
   if (n == null) return ''
@@ -69,17 +77,18 @@ export async function listProducts(req, res) {
       }
     } catch (err) {
       console.error('Firestore read failed, falling back to static JSON', err)
+      return res.status(404).json({ error: 'Gagal mengambil data products.' })
       // fallback to static
     }
   }
 
-  // fallback to static JSON
-  if (gender === 'man') {
-    return res.json(manFashion)
-  } else if (gender === 'woman') {
-    return res.json(womanFashion)
-  }
-  return res.json({ man: manFashion, woman: womanFashion })
+//   // fallback to static JSON
+//   if (gender === 'man') {
+//     return res.json(manFashion)
+//   } else if (gender === 'woman') {
+//     return res.json(womanFashion)
+//   }
+//   return res.json({ man: manFashion, woman: womanFashion })
 }
 
 export async function getProductById(req, res) {
@@ -94,15 +103,16 @@ export async function getProductById(req, res) {
       return res.status(404).json({ error: 'Produk tidak ditemukan' })
     } catch (err) {
       console.error('Firestore get failed, falling back to static JSON', err)
+      return res.status(404).json({ error: 'Produk tidak ditemukan' })
       // fallback to static
     }
   }
 
-  const allProducts = getAllProductsArray()
-  const product = allProducts.find((p) => p.id && p.id.toLowerCase() === id.toLowerCase())
-  if (product) return res.json(product)
+  // const allProducts = getAllProductsArray()
+  // const product = allProducts.find((p) => p.id && p.id.toLowerCase() === id.toLowerCase())
+  // if (product) return res.json(product)
 
-  return res.status(404).json({ error: 'Produk tidak ditemukan' })
+  // return res.status(404).json({ error: 'Produk tidak ditemukan' })
 }
 
 // ---------------- CRUD handlers ----------------
