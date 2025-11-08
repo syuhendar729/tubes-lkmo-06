@@ -1,6 +1,6 @@
 // File: nuve-fe/src/components/ProductForm.jsx
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import './Admin.css';
 
 // Navbar yang sama
@@ -15,47 +15,18 @@ const AdminNavbar = () => (
 );
 
 const ProductForm = () => {
-  const { id } = useParams(); // Mengambil ID dari URL
   const navigate = useNavigate();
-  const isUpdating = Boolean(id); // Cek apakah ini mode 'Edit' atau 'Buat Baru'
 
   const [formData, setFormData] = useState({
     nama: '',
     jenis: '',
     harga: '',
     deskripsi: '',
-    id: '',
     gender: 'man',    // 'man' atau 'woman'
     kategori: 'top' // 'top', 'down', atau 'footwear'
   });
   const [imageFile, setImageFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  // Jika ini mode 'Update', ambil data produk dulu
-  useEffect(() => {
-    if (isUpdating) {
-      setIsLoading(true);
-      const fetchProduct = async () => {
-        try {
-          const response = await fetch(`https://nuve-be.vercel.app/api/product/${id}`);
-          const data = await response.json();
-          // Tebak gender dan kategori dari ID
-          const gender = id.startsWith('woma') ? 'woman' : 'man';
-          let kategori = 'top';
-          if (id.includes('down')) kategori = 'down';
-          if (id.includes('foot')) kategori = 'footwear';
-
-          setFormData({ ...data, gender, kategori });
-        } catch (error) {
-          console.error('Error fetching product:', error);
-          alert('Gagal mengambil data produk');
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      fetchProduct();
-    }
-  }, [id, isUpdating]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -66,14 +37,13 @@ const ProductForm = () => {
     setImageFile(e.target.files[0]);
   };
 
-  // Fungsi CREATE / UPDATE
+  // Fungsi CREATE (only)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     // Backend membutuhkan FormData karena kita mengirim file
     const data = new FormData();
-    data.append('id', formData.id);
     data.append('nama', formData.nama);
     data.append('jenis', formData.jenis);
     data.append('harga', formData.harga);
@@ -86,11 +56,9 @@ const ProductForm = () => {
     }
 
     // Tentukan URL dan Method
-    const url = isUpdating
-      ? `https://nuve-be.vercel.app/api/product/${id}`
-      : 'https://nuve-be.vercel.app/api/product';
-    
-    const method = isUpdating ? 'PUT' : 'POST';
+    const url = 'https://nuve-be.vercel.app/api/product'
+    // const url = 'http://localhost:3030/api/product'
+    const method = 'POST'
 
     try {
       // KIRIM DATA KE API (ASUMSI)
@@ -103,7 +71,7 @@ const ProductForm = () => {
         throw new Error('Gagal menyimpan data');
       }
       
-      alert(`Produk berhasil ${isUpdating ? 'diperbarui' : 'dibuat'}!`);
+  alert('Produk berhasil dibuat!');
       navigate('/admin'); // Kembali ke dashboard
 
     } catch (error) {
@@ -114,15 +82,15 @@ const ProductForm = () => {
     }
   };
 
-  if (isLoading && isUpdating) {
-    return <p>Memuat data produk...</p>;
+  if (isLoading) {
+    return <p>Menyimpan...</p>;
   }
 
   return (
     <div>
       <AdminNavbar />
       <div className="admin-container">
-        <h2>{isUpdating ? 'Edit Produk' : 'Tambah Produk Baru'}</h2>
+  <h2>Tambah Produk Baru</h2>
         <form onSubmit={handleSubmit} className="admin-form">
           
           <div className="form-group">
@@ -142,18 +110,7 @@ const ProductForm = () => {
             </select>
           </div>
 
-          <div className="form-group">
-            <label>ID Produk (cth: mantop01, womadown02)</label>
-            <input
-              type="text"
-              name="id"
-              placeholder="ID unik produk"
-              value={formData.id}
-              onChange={handleInputChange}
-              required
-              disabled={isUpdating} // ID tidak bisa diubah saat update
-            />
-          </div>
+          {/* ID field removed — backend generates IDs on create */}
 
           <div className="form-group">
             <label>Nama Produk</label>
@@ -208,11 +165,11 @@ const ProductForm = () => {
               name="image"
               onChange={handleFileChange}
             />
-            {isUpdating && <small>Kosongkan jika tidak ingin mengganti gambar.</small>}
+            {/* guidance for upload (no edit mode) */}
           </div>
 
           <button type="submit" disabled={isLoading} className="btn-create">
-            {isLoading ? 'Menyimpan...' : (isUpdating ? 'Update Produk' : 'Simpan Produk')}
+            {isLoading ? 'Menyimpan...' : 'Simpan Produk'}
           </button>
         </form>
       </div>
