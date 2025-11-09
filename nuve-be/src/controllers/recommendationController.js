@@ -86,16 +86,15 @@ Kategori FOOTWEAR (Alas Kaki):
 5. Noir Point — Sepatu, Rp 189.000. Sepatu heels hitam berujung runcing dengan bahan glossy modern. (ID: womanfootwear05)
 
 
-      Berikan rekomendasi dalam format:
-      1. Gaya berpakaian utama
-      2. Warna dominan
-      3. Jenis pakaian utama
-      4. Aksesori tambahan (jika perlu)
-      5. Rekomendasi merek atau kisaran harga (opsional)
-      6. Penjelasan singkat mengapa gaya ini cocok
-      Buatkan saja dalam 1 paragraf singkat.
+      Berikan rekomendasi dalam format seperti di bawah ini tanpa ada tambahan seperti syntax markdown seperti * dan lainnya dan tanpa tambahan penjelasan lainnya dan juga menyesuaikan dengan jenis pakaian yang dicari (${jenis_pakaian}):
+"Kami merekomendasikan kamu menggunakan:
+Atasan (nama produk X).... dengan harga ...
+Bawahan (nama produk Y).... dengan harga ...
+Footwear (nama produk Z).... dengan harga ...
 
-      Setelah penjelasan paragraf berikan juga rekomendasi produk spesifik dari katalog di atas yang sesuai dengan gaya tersebut, sebutkan ID produk, nama produk, dan harganya.
+Dari situ produk yang tepat untuk kamu pilih adalah
+Produk (nama produk X), Produk (nama produk Y), Produk (nama produk Z)."
+
     `
 
     let usedModel
