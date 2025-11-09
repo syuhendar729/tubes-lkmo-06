@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { API_BASE } from '../config.js'
 import './ProductDetail.css';
 
-// Fungsi getImagePath 
+// Fungsi getImagePath: prefer backend-provided image_url or image.publicUrl.
+// Fallback to default image in public folder (/default.jpg). Keep legacy local asset attempt if desired.
 const getImagePath = (product, gender) => {
-  const genderPath = gender === 'man' ? 'asset-man' : 'asset-womam';
-  let categoryPath = 'shirt';
-  if (!product || !product.jenis) return '/asset/placeholder.png';
-  const type = product.jenis.toLowerCase();
+  if (!product) return '/default.jpg'
+  const remote = product.image_url || (product.image && (product.image.publicUrl || product.image.public_url || product.image.url))
+  if (remote) return remote
+
+  // Legacy attempt to use local asset by product name, otherwise default
+  if (!product.jenis) return '/default.jpg'
+  const genderPath = gender === 'man' ? 'asset-man' : 'asset-womam'
+  let categoryPath = 'shirt'
+  const type = product.jenis.toLowerCase()
   if (['jaket', 'hoodie', 'kemeja', 'kaos', 'sweater', 'blouse', 'cardigan', 'outer', 'tank top'].includes(type)) {
-    categoryPath = 'shirt';
+    categoryPath = 'shirt'
   } else if (['celana', 'rok', 'dress', 'jeans'].includes(type)) {
-    categoryPath = 'pants';
+    categoryPath = 'pants'
   } else if (['sepatu'].includes(type)) {
-    categoryPath = gender === 'man' ? 'footwear' : 'footware';
+    categoryPath = gender === 'man' ? 'footwear' : 'footware'
   }
-  return `/asset/${genderPath}/${categoryPath}/${product.nama}.png`;
+  return `/asset/${genderPath}/${categoryPath}/${product.nama}.png` || '/default.jpg'
 };
 
 
@@ -38,8 +45,8 @@ const ProductDetail = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const apiURL = `https://nuve-be.vercel.app/api/product/${id}`;
-        const response = await fetch(apiURL);
+  const apiURL = `${API_BASE}/api/product/${id}`;
+  const response = await fetch(apiURL);
         
         if (!response.ok) {
           throw new Error('Produk tidak ditemukan'); 

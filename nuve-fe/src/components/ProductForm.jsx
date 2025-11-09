@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Admin.css';
+import { API_BASE } from '../config.js';
 
 // Navbar yang sama
 const AdminNavbar = () => (
@@ -55,9 +56,8 @@ const ProductForm = () => {
       data.append('image', imageFile); // 'image' adalah key untuk file
     }
 
-    // Tentukan URL dan Method
-    const url = 'https://nuve-be.vercel.app/api/product'
-    // const url = 'http://localhost:3030/api/product'
+  // Tentukan URL dan Method (gunakan environment-driven API base)
+  const url = `${API_BASE}/api/product`;
     const method = 'POST'
 
     try {

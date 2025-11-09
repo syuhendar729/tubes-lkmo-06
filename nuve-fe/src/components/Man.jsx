@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Recommendation.css';
+import { API_BASE } from '../config.js';
 
 const Man = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -52,7 +53,7 @@ const Man = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://localhost:5000/api/products?gender=man');
+        const response = await fetch(`${API_BASE}/api/products?gender=man`);
         const data = await response.json();
         console.log('Data fetched from API:', data);
         setProductData(data);
@@ -148,7 +149,7 @@ const Man = () => {
 
       console.log('Sending request to Gemini API:', requestBody);
 
-      const response = await fetch('https://nuve-be.vercel.app/api/rekomendasi-fashion', {
+      const response = await fetch(`${API_BASE}/api/rekomendasi-fashion`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -32,14 +32,19 @@ function formatPriceTextFromNumber(n) {
 
 function docToLegacy(doc) {
   const d = doc.data()
+  // prefer explicit image_url stored in doc, then common image fields
+  const remote = d.image_url || (d.image && (d.image.publicUrl || d.image.public_url || d.image.url)) || null
   return {
     nama: d.name || d.nama || '',
     jenis: d.jenis || d.category || '',
     harga: d.price_text || (d.price ? formatPriceTextFromNumber(d.price) : ''),
     deskripsi: d.description || d.deskripsi || '',
     id: doc.id,
+    image_url: remote,
+    image: d.image || null,
   }
 }
+
 
 async function fetchProductsGroupedByGenderFromFirestore(gender) {
   const db = admin.firestore()

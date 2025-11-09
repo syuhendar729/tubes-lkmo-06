@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Product.css';
+import { API_BASE } from '../config.js'
 
-// Fungsi getImagePath (Tidak berubah)
+// Fungsi getImagePath: prefer remote image URL from backend (image_url or image.publicUrl).
+// If not available, fall back to a default image placed in public/default.jpg.
 const getImagePath = (product, gender) => {
-  const genderPath = gender === 'man' ? 'asset-man' : 'asset-womam';
-  let categoryPath = 'shirt';
-  if (!product || !product.jenis) return '/asset/placeholder.png';
-  const type = product.jenis.toLowerCase();
-  if (['jaket', 'hoodie', 'kemeja', 'kaos', 'sweater', 'blouse', 'cardigan', 'outer', 'tank top'].includes(type)) {
-    categoryPath = 'shirt';
-  } else if (['celana', 'rok', 'dress', 'jeans'].includes(type)) {
-    categoryPath = 'pants';
-  } else if (['sepatu'].includes(type)) {
-    categoryPath = gender === 'man' ? 'footwear' : 'footware';
+  if (!product) return '/default.jpg'
+  // common fields the backend may return
+  const remote = product.image_url || (product.image && (product.image.publicUrl || product.image.public_url || product.image.url))
+  if (remote) return remote
+
+  // Fallback: try to use local asset by name (older behavior) — but if not present, default.jpg will show.
+  try {
+    const genderPath = gender === 'man' ? 'asset-man' : 'asset-womam'
+    let categoryPath = 'shirt'
+    if (!product.jenis) return '/default.jpg'
+    const type = product.jenis.toLowerCase()
+    if (['jaket', 'hoodie', 'kemeja', 'kaos', 'sweater', 'blouse', 'cardigan', 'outer', 'tank top'].includes(type)) {
+      categoryPath = 'shirt'
+    } else if (['celana', 'rok', 'dress', 'jeans'].includes(type)) {
+      categoryPath = 'pants'
+    } else if (['sepatu'].includes(type)) {
+      categoryPath = gender === 'man' ? 'footwear' : 'footware'
+    }
+    return `/asset/${genderPath}/${categoryPath}/${product.nama}.png`
+  } catch (e) {
+    return '/default.jpg'
   }
-  return `/asset/${genderPath}/${categoryPath}/${product.nama}.png`;
-};
+}
 
 // --- REVISI UTAMA DI SINI ---
 const ProductCard = ({ product, gender }) => (
@@ -62,7 +74,7 @@ const Product = () => {
     const fetchProducts = async () => {
       try {
         // Panggilan API ini tetap sama
-        const response = await fetch('https://nuve-be.vercel.app/api/products');
+      const response = await fetch(`${API_BASE}/api/products`);
         if (!response.ok) {
           throw new Error('Gagal mengambil data produk');
         }

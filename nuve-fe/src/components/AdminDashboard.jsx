@@ -1,6 +1,7 @@
 // File: nuve-fe/src/components/AdminDashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { API_BASE } from '../config.js'
 import './Admin.css';
 
 // Komponen Navbar yang sama dengan seluruh website
@@ -23,8 +24,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://nuve-be.vercel.app/api/products');
-        const data = await response.json();
+  const response = await fetch(`${API_BASE}/api/products`);
+  const data = await response.json();
         
         // Gabungkan semua produk dari man
         setManData([
@@ -56,7 +57,7 @@ const AdminDashboard = () => {
 
     try {
       // API UNTUK DELETE (ASUMSI)
-      const response = await fetch(`https://nuve-be.vercel.app/api/product/${id}`, {
+      const response = await fetch(`${API_BASE}/api/product/${id}`, {
         method: 'DELETE',
       });
 
