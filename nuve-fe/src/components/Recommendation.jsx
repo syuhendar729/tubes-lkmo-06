@@ -64,25 +64,34 @@ const Recommendation = ({ gender }) => {
 
   const basePath = `../asset/asset-${gender}`;
 
-  return (
-    <div>
-      <nav className="navbar">
-        <div className="logo">NUVE'</div>
-        <div className="nav-links">
-          <a href="index.html">Home</a>
-          <a href="aboutus.html">About Us</a>
-          <a href="#women">Product</a>
-          <div className="nav-dropdown">
-            <a href="#" className="dropdown-toggle" onClick={(e) => { e.preventDefault(); toggleDropdown(); }}>
-              Rekomendasi
-            </a>
-            <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-              <a href="man.html" className="dropdown-item">Man</a>
-              <a href="woman.html" className="dropdown-item">Woman</a>
+  rreturn (
+      <div>
+        {/* NAVBAR */}
+        <nav className="navbar">
+          <div className="logo">NUVE'</div>
+          <div className="nav-links">
+            <Link to="/">Home</Link>
+            <Link to="/about">About Us</Link>
+            <Link to="/product">Product</Link>
+  
+            <div className="nav-dropdown">
+              <a
+                href="#"
+                className="dropdown-toggle"
+                onClick={toggleDropdown}
+              >
+                Rekomendasi
+              </a>
+              <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
+                <Link to="/man" className="dropdown-item">Man</Link>
+                <Link to="/woman" className="dropdown-item">Woman</Link>
+              </div>
             </div>
+  
+            <Link to="/contact">Contact</Link>
           </div>
-        </div>
-      </nav>
+        </nav>
+  
 
       <main className="man-main">
         <h1 className="man-title">{gender === 'man' ? 'Man' : 'Woman'}</h1>
